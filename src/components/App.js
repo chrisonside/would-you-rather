@@ -1,19 +1,51 @@
 import React, { Component } from 'react';
-import '../styles/App.css';
+import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+// import ReactLoading from 'react-loading';
+
+import '../styles/app.css';
+import SignIn from './SignIn';
 
 class App extends Component {
+
+  // componentDidMount() {
+  // }
+
   render() {
+
+    // const { userLoggedIn } = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        {/* {!userLoggedIn && <SignIn></SignIn> } */}
+
+        <SignIn></SignIn>
+
+        {/* <Nav></Nav>
+
+        <UserDetails></UserDetails>
+
+        <Polls></Polls>
+
+        <Page404></Page404>
+
+        <AddPoll></AddPoll> */}
+
       </div>
+
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+ return  {
+  userLoggedIn: state.userLoggedIn
+ }
+}
+
+
+export default connect(
+  mapStateToProps
+)(App);

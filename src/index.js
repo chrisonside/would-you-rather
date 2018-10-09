@@ -22,7 +22,7 @@ const newStore = createStore(
 );
 
 /*
-* Expose store to root component using Provider from React Redux bindings
+* Expose Redux store to root component using Provider from React Redux bindings
 * Wrap App in React Router's BrowserRouter component, which listens to changes in App's URL and notifies other components
 */
 ReactDOM.render(
