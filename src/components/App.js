@@ -4,24 +4,25 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router-dom';
 // import ReactLoading from 'react-loading';
 
+import { isObjectEmpty } from '../utils/helper';
 import '../styles/app.css';
 import SignIn from './SignIn';
+import UserDetails from './UserDetails';
+import {
+  addCurrentUser
+} from '../actions';
 
 class App extends Component {
 
-  // componentDidMount() {
-  // }
-
   render() {
-
-    // const { userLoggedIn } = this.state;
+    const { loggedInUser } = this.props;
 
     return (
       <div className="App">
 
-        {/* {!userLoggedIn && <SignIn></SignIn> } */}
+        {isObjectEmpty(loggedInUser) && <SignIn></SignIn> }
 
-        <SignIn></SignIn>
+        {!isObjectEmpty(loggedInUser) && <UserDetails></UserDetails> }
 
         {/* <Nav></Nav>
 
@@ -39,13 +40,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
- return  {
-  userLoggedIn: state.userLoggedIn
+function mapStateToProps( {loggedInUser} ) {
+  return {
+    loggedInUser
  }
 }
 
-
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  null
 )(App);

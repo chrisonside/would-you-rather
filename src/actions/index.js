@@ -4,6 +4,7 @@ import { arrayToObject } from '../utils/helper';
 // Set up constants - these are exported to reducers
 export const GET_USERS = 'GET_USERS';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
 export const SAVE_QUESTION = 'SAVE_QUESTION';
 export const SAVE_ANSWER  = 'SAVE_ANSWER';
 
@@ -29,3 +30,7 @@ export const getQuestions = () => dispatch => (
   ._getQuestions()
   .then(questions => dispatch(updateReduxStore(questions, GET_QUESTIONS)))
 );
+
+export const addCurrentUser = (user) => dispatch => (
+  dispatch(updateReduxStore(user, ADD_CURRENT_USER))
+)

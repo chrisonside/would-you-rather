@@ -6,6 +6,10 @@ export function isObjectEmpty(obj) {
   }
 }
 
+export function isArrayEmpty(array) {
+  return array.length <= 0;
+}
+
 // Based on this article https://bit.ly/2tHkeo7
 export function arrayToObject(array, keyField) {
   return array.reduce((obj, item) => {

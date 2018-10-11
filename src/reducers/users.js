@@ -4,7 +4,6 @@ import {
 
 export function users(usersState = {}, action) {
   const { payload } = action;
-  console.log(payload);
   switch (action.type) {
     case GET_USERS :
       return {
