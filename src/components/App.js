@@ -6,8 +6,11 @@ import { Switch } from 'react-router-dom';
 
 import { isObjectEmpty } from '../utils/helper';
 import '../styles/app.css';
+
 import SignIn from './SignIn';
 import UserDetails from './UserDetails';
+import PollList from './PollList';
+
 import {
   addCurrentUser
 } from '../actions';
@@ -22,7 +25,12 @@ class App extends Component {
 
         {isObjectEmpty(loggedInUser) && <SignIn></SignIn> }
 
-        {!isObjectEmpty(loggedInUser) && <UserDetails></UserDetails> }
+        {!isObjectEmpty(loggedInUser) &&
+          <div>
+            <UserDetails></UserDetails>
+            <PollList></PollList>
+          </div>
+        }
 
         {/* <Nav></Nav>
 

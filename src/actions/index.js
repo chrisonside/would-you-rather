@@ -25,10 +25,18 @@ export const getUsers = () => dispatch => (
   .then(users => dispatch(updateReduxStore(users, GET_USERS)))
 );
 
-export const getQuestions = () => dispatch => (
+export const getQuestions = (user) => dispatch => (
   API
   ._getQuestions()
-  .then(questions => dispatch(updateReduxStore(questions, GET_QUESTIONS)))
+  .then(questions => {
+    const answers = user.answers;
+    for (var answer in answers) {
+      if (answers.hasOwnProperty(answer)) {
+        questions[answer].userAnswer = answers[answer]
+      }
+    }
+    dispatch(updateReduxStore(questions, GET_QUESTIONS))
+  })
 );
 
 export const addCurrentUser = (user) => dispatch => (
