@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 // Import reducers
 import { loggedInUser } from './loggedInUser';
 import { users } from './users';
-import { questions } from './questions';
+import { answeredQuestions } from './answeredQuestions';
+import { unAnsweredQuestions } from './unAnsweredQuestions';
 
 export default combineReducers({
   loggedInUser,
   users,
-  questions,
+  answeredQuestions,
+  unAnsweredQuestions,
 });

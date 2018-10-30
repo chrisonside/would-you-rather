@@ -3,7 +3,8 @@ import { arrayToObject } from '../utils/helper';
 
 // Set up constants - these are exported to reducers
 export const GET_USERS = 'GET_USERS';
-export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const GET_ANSWERED_QUESTIONS = 'GET_ANSWERED_QUESTIONS';
+export const GET_UNANSWERED_QUESTIONS = 'GET_UNANSWERED_QUESTIONS';
 export const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
 export const SAVE_QUESTION = 'SAVE_QUESTION';
 export const SAVE_ANSWER  = 'SAVE_ANSWER';
@@ -29,13 +30,26 @@ export const getQuestions = (user) => dispatch => (
   API
   ._getQuestions()
   .then(questions => {
-    const answers = user.answers;
-    for (var answer in answers) {
-      if (answers.hasOwnProperty(answer)) {
-        questions[answer].userAnswer = answers[answer]
+    const answeredQuestions = {};
+    const unAnsweredQuestions = {};
+    console.log(questions);
+    // Loop through questions
+    for (var question in questions) {
+      // For each question (E.g. 8xf0y6ziyjabvozdd253nd)
+      if (questions.hasOwnProperty(question)) {
+        // If user.answers.question exists, add question to answered and call reducer
+        if(user.answers[question]) {
+          answeredQuestions[question] = questions[question];
+          // And add their answer
+          answeredQuestions[question].userAnswer = user.answers[question];
+        } else {
+          // Else add question to unanswered, and call reducer
+          unAnsweredQuestions[question] = questions[question];
+        }
       }
     }
-    dispatch(updateReduxStore(questions, GET_QUESTIONS))
+    dispatch(updateReduxStore(answeredQuestions, GET_ANSWERED_QUESTIONS));
+    dispatch(updateReduxStore(unAnsweredQuestions, GET_UNANSWERED_QUESTIONS))
   })
 );
 

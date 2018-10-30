@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        {isObjectEmpty(loggedInUser) && <SignIn></SignIn> }
+        {isObjectEmpty(loggedInUser) && <SignIn></SignIn>}
 
         {!isObjectEmpty(loggedInUser) &&
           <div>

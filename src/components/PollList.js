@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { isObjectEmpty } from '../utils/helper';
 
 import {
   getQuestions
@@ -20,27 +21,36 @@ class PollList extends Component {
 
   toggleQuestions() {
     console.log('toggled');
+    // Need to update this as it depends on the previous state so needs a different format
     // this.setState({ displayUnanswered: true });
   }
 
   render() {
-    const { answeredArray } = this.props;
-    const { unansweredArray } = this.props;
+    const { answered } = this.props;
+    const { notAnswered } = this.props;
     const { displayUnanswered } = this.state;
 
-    const answersToDisplay = displayUnanswered ? unansweredArray : answeredArray;
+    const answersToDisplay = displayUnanswered ? notAnswered : answered;
 
     return (
       <div>
         <div className='polllist__toggle' onClick={this.toggleQuestions}>Toggle questions</div>
         {!isArrayEmpty(answersToDisplay) && (
           <div className='pollist'>
-            <h2 className='pollist__title'>Questions</h2>
             <div className='pollist__questions'>
               {answersToDisplay.map((question, index) => (
-                <div key={ `${question.name}-${index}`} className='pollist__question'>
-                  <h3 className='pollist__question-title'>{question.id}</h3>
-                  {/* <a className='pollist__link' data-question={question.id} onClick={this.handleUserSelection}></a> */}
+                <div>
+                  <h2 className='pollist__title'>Would you rather...</h2>
+                  <div key={ `${question.name}-${index}`} className='pollist__question'>
+                    <p className='pollist__question-title'>
+                      {question.optionOne.text}
+                      <br />
+                      or
+                      <br />
+                      {question.optionTwo.text}
+                    </p>
+                    {/* <a className='pollist__link' data-question={question.id} onClick={this.handleUserSelection}></a> */}
+                  </div>
                 </div>
               ))}
             </div>
@@ -51,31 +61,38 @@ class PollList extends Component {
   }
 }
 
+function convertToArray(object) {
+  return Object.keys(object).map(i => object[i]);
+}
+
+// https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value#answer-1129270
+function compareTimestamp(a,b) {
+  if (a.timestamp < b.timestamp)
+    return -1;
+  if (a.timestamp > b.timestamp)
+    return 1;
+  return 0;
+}
+
+function prepData(object) {
+  let newArray = convertToArray(object);
+  return newArray.sort(compareTimestamp);
+}
+
 // Format shape of store data for this component
-function mapStateToProps( {questions, loggedInUser} ) {
-
-  /*  Convert questions from Redux store's object format to an array, for easy looping over in UI */
-  let answeredArray = [];
-  let unansweredArray = [];
-
-  if(questions) {
-    let objectKeys = [Object.keys(questions)];
-    objectKeys[0].map((objKey) => {
-      console.log(questions[objKey].userAnswer);
-      if(questions[objKey].userAnswer) {
-        answeredArray.push(questions[objKey]);
-      } else {
-        unansweredArray.push(questions[objKey]);
-      }
-    });
-
-    // Up to here! Maybe look at creating 2 objects in the store instead (via the actions file).
-    // Before making decision, look at other metrics I'll need and see if store structure works. e.g. percentage of users gave what answer...
+function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions} ) {
+  let answered = [];
+  let notAnswered = [];
+  if(!isObjectEmpty(answeredQuestions)) {
+    answered = prepData(answeredQuestions);
+  }
+  if(!isObjectEmpty(unAnsweredQuestions)) {
+    notAnswered = prepData(unAnsweredQuestions);
   }
 
   return {
-    answeredArray,
-    unansweredArray,
+    answered,
+    notAnswered,
     loggedInUser
   }
 
