@@ -67,3 +67,20 @@ body {
   height: 100%;
   z-index: 1;
 }
+
+/* PollList styles */
+
+.polllist__toggle {
+  display: inline-block;
+  padding: 20px 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.pollist--true .polllist__toggle--answered {
+  background: limegreen;
+}
+
+.pollist--false .polllist__toggle--notanswered {
+  background: limegreen;
+}

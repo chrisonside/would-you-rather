@@ -11,7 +11,7 @@ import { isArrayEmpty } from '../utils/helper';
 class PollList extends Component {
 
   state = {
-    displayUnanswered: true
+    showAnswered: false
   }
 
   // Populate users data in Redux Store - the store update will trigger a rerender
@@ -19,38 +19,40 @@ class PollList extends Component {
     this.props.getQuestions(this.props.loggedInUser);
   }
 
-  toggleQuestions() {
-    console.log('toggled');
-    // Need to update this as it depends on the previous state so needs a different format
-    // this.setState({ displayUnanswered: true });
+  displayAnswered(bool) {
+    if (bool === this.state.showAnswered) {
+      return;
+    } else {
+      this.setState(prevState => ({
+        showAnswered: !prevState.showAnswered
+      }))
+    }
   }
 
   render() {
     const { answered } = this.props;
     const { notAnswered } = this.props;
-    const { displayUnanswered } = this.state;
-
-    const answersToDisplay = displayUnanswered ? notAnswered : answered;
+    const { showAnswered } = this.state;
+    const answersToDisplay = showAnswered ? answered : notAnswered;
 
     return (
-      <div>
-        <div className='polllist__toggle' onClick={this.toggleQuestions}>Toggle questions</div>
+      <div className={`pollist pollist--${showAnswered}`}>
+        <div className='polllist__toggle polllist__toggle--answered' onClick={() => this.displayAnswered(true)}>Answered</div>
+        <div className='polllist__toggle polllist__toggle--notanswered' onClick={() => this.displayAnswered(false)}>Not answered</div>
         {!isArrayEmpty(answersToDisplay) && (
-          <div className='pollist'>
+          <div>
             <div className='pollist__questions'>
               {answersToDisplay.map((question, index) => (
-                <div>
+                <div key={ `${question.name}-${index}`} className='pollist__question'>
                   <h2 className='pollist__title'>Would you rather...</h2>
-                  <div key={ `${question.name}-${index}`} className='pollist__question'>
-                    <p className='pollist__question-title'>
-                      {question.optionOne.text}
-                      <br />
-                      or
-                      <br />
-                      {question.optionTwo.text}
-                    </p>
-                    {/* <a className='pollist__link' data-question={question.id} onClick={this.handleUserSelection}></a> */}
-                  </div>
+                  <p className='pollist__question-title'>
+                    {question.optionOne.text}
+                    <br />
+                    or
+                    <br />
+                    {question.optionTwo.text}
+                  </p>
+                  {/* <a className='pollist__link' data-question={question.id} onClick={this.handleUserSelection}></a> */}
                 </div>
               ))}
             </div>
@@ -75,20 +77,17 @@ function compareTimestamp(a,b) {
 }
 
 function prepData(object) {
-  let newArray = convertToArray(object);
-  return newArray.sort(compareTimestamp);
+  let newArray = [];
+  if(!isObjectEmpty(object)) {
+    newArray = convertToArray(object).sort(compareTimestamp);
+  }
+  return newArray;
 }
 
 // Format shape of store data for this component
 function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions} ) {
-  let answered = [];
-  let notAnswered = [];
-  if(!isObjectEmpty(answeredQuestions)) {
-    answered = prepData(answeredQuestions);
-  }
-  if(!isObjectEmpty(unAnsweredQuestions)) {
-    notAnswered = prepData(unAnsweredQuestions);
-  }
+  const answered = prepData(answeredQuestions);
+  const notAnswered = prepData(unAnsweredQuestions);
 
   return {
     answered,
