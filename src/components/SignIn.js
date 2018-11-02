@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import {
   getUsers,
-  addCurrentUser
+  // addCurrentUser
+  setUserAndQuestions,
 } from '../actions';
 
 import { isArrayEmpty } from '../utils/helper';
@@ -24,11 +25,12 @@ class SignIn extends Component {
   handleUserSelection(e) {
     const userNameSelected = e.target.getAttribute('data-user');
     const userDetails = this.props.usersObject[userNameSelected];
-    this.props.addCurrentUser(userDetails);
+    this.props.setUserAndQuestions(userDetails);
   }
 
   render() {
     const { usersArray } = this.props;
+
     return (
       <div>
         {!isArrayEmpty(usersArray) && (
@@ -76,7 +78,7 @@ function mapStateToProps( {users} ) {
 function mapDispatchToProps(dispatch) {
   return {
     getUsers: () => dispatch(getUsers()),
-    addCurrentUser: (user) => dispatch(addCurrentUser(user))
+    setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user))
   }
 }
 

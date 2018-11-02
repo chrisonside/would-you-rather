@@ -1,11 +1,11 @@
 import {
-  GET_USERS
+  SET_USERS
 } from '../actions';
 
 export function users(usersState = {}, action) {
   const { payload } = action;
   switch (action.type) {
-    case GET_USERS :
+    case SET_USERS :
       return {
         ...usersState[0] = payload
       }

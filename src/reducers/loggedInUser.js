@@ -1,4 +1,3 @@
-import * as API from '../data/_DATA.js';
 import {
   ADD_CURRENT_USER
 } from '../actions';

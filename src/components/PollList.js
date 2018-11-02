@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isObjectEmpty } from '../utils/helper';
+import { Link } from 'react-router-dom';
 
 import {
-  getQuestions
+  // getQuestions,
+  addCurrentPoll,
 } from '../actions';
 
 import { isArrayEmpty } from '../utils/helper';
@@ -15,9 +17,9 @@ class PollList extends Component {
   }
 
   // Populate users data in Redux Store - the store update will trigger a rerender
-  componentDidMount() {
-    this.props.getQuestions(this.props.loggedInUser);
-  }
+  // componentDidMount() {
+  //   this.props.getQuestions(this.props.loggedInUser);
+  // }
 
   displayAnswered(bool) {
     if (bool === this.state.showAnswered) {
@@ -27,6 +29,10 @@ class PollList extends Component {
         showAnswered: !prevState.showAnswered
       }))
     }
+  }
+
+  updateCurrentPoll(poll) {
+    this.props.addCurrentPoll(poll);
   }
 
   render() {
@@ -42,17 +48,18 @@ class PollList extends Component {
         {!isArrayEmpty(answersToDisplay) && (
           <div>
             <div className='pollist__questions'>
+              <h2 className='pollist__title'>Would you rather...</h2>
               {answersToDisplay.map((question, index) => (
                 <div key={ `${question.name}-${index}`} className='pollist__question'>
-                  <h2 className='pollist__title'>Would you rather...</h2>
                   <p className='pollist__question-title'>
-                    {question.optionOne.text}
-                    <br />
-                    or
-                    <br />
-                    {question.optionTwo.text}
+                    {question.optionOne.text} or {question.optionTwo.text}
                   </p>
-                  {/* <a className='pollist__link' data-question={question.id} onClick={this.handleUserSelection}></a> */}
+                  <Link
+                    to={`/${question.id}`}
+                    className='pollist__link'
+                    onClick={() => this.updateCurrentPoll(question)}>
+                      See poll details
+                  </Link>
                 </div>
               ))}
             </div>
@@ -100,7 +107,8 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
 // Bind dispatch to the action creators required for this component - in this case, to populate my Store with my users
 function mapDispatchToProps(dispatch) {
   return {
-    getQuestions: (user) => dispatch(getQuestions(user))
+    // getQuestions: (user) => dispatch(getQuestions(user)),
+    addCurrentPoll: (poll) => dispatch(addCurrentPoll(poll)),
   }
 }
 

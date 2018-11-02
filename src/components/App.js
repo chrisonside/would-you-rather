@@ -7,13 +7,13 @@ import { Switch } from 'react-router-dom';
 import { isObjectEmpty } from '../utils/helper';
 import '../styles/app.css';
 
+import Home from './Home';
 import SignIn from './SignIn';
 import UserDetails from './UserDetails';
 import PollList from './PollList';
-
-import {
-  addCurrentUser
-} from '../actions';
+import AddPoll from './AddPoll';
+import Leaderboard from './Leaderboard';
+import Poll from './Poll';
 
 class App extends Component {
 
@@ -23,24 +23,12 @@ class App extends Component {
     return (
       <div className="App">
 
-        {isObjectEmpty(loggedInUser) && <SignIn></SignIn>}
-
-        {!isObjectEmpty(loggedInUser) &&
-          <div>
-            <UserDetails></UserDetails>
-            <PollList></PollList>
-          </div>
-        }
-
-        {/* <Nav></Nav>
-
-        <UserDetails></UserDetails>
-
-        <Polls></Polls>
-
-        <Page404></Page404>
-
-        <AddPoll></AddPoll> */}
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route exact path='/add-poll' component={AddPoll}/>
+          <Route exact path='/leaderboard' component={Leaderboard}/>
+          <Route exact path='/:id?' component={Poll} />
+        </Switch>
 
       </div>
 
@@ -48,13 +36,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps( {loggedInUser} ) {
-  return {
-    loggedInUser
- }
-}
-
-export default connect(
-  mapStateToProps,
-  null
-)(App);
+export default App;

@@ -2,12 +2,14 @@ import * as API from '../data/_DATA.js';
 import { arrayToObject } from '../utils/helper';
 
 // Set up constants - these are exported to reducers
-export const GET_USERS = 'GET_USERS';
-export const GET_ANSWERED_QUESTIONS = 'GET_ANSWERED_QUESTIONS';
-export const GET_UNANSWERED_QUESTIONS = 'GET_UNANSWERED_QUESTIONS';
+export const SET_USERS = 'SET_USERS';
+export const SET_ALL_QUESTIONS = 'SET_ALL_QUESTIONS';
+export const SET_ANSWERED_QUESTIONS = 'SET_ANSWERED_QUESTIONS';
+export const SET_UNANSWERED_QUESTIONS = 'SET_UNANSWERED_QUESTIONS';
 export const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
 export const SAVE_QUESTION = 'SAVE_QUESTION';
 export const SAVE_ANSWER  = 'SAVE_ANSWER';
+export const ADD_CURRENT_POLL = 'ADD_CURRENT_POLL';
 
 /*
   *
@@ -23,16 +25,15 @@ export const updateReduxStore = (payload, type) => ({
 export const getUsers = () => dispatch => (
   API
   ._getUsers()
-  .then(users => dispatch(updateReduxStore(users, GET_USERS)))
+  .then(users => dispatch(updateReduxStore(users, SET_USERS)))
 );
 
-export const getQuestions = (user) => dispatch => (
+export const setUserAndQuestions = (user) => dispatch => (
   API
   ._getQuestions()
   .then(questions => {
     const answeredQuestions = {};
     const unAnsweredQuestions = {};
-    console.log(questions);
     // Loop through questions
     for (var question in questions) {
       // For each question (E.g. 8xf0y6ziyjabvozdd253nd)
@@ -48,11 +49,17 @@ export const getQuestions = (user) => dispatch => (
         }
       }
     }
-    dispatch(updateReduxStore(answeredQuestions, GET_ANSWERED_QUESTIONS));
-    dispatch(updateReduxStore(unAnsweredQuestions, GET_UNANSWERED_QUESTIONS))
+    dispatch(updateReduxStore(questions, SET_ALL_QUESTIONS));
+    dispatch(updateReduxStore(answeredQuestions, SET_ANSWERED_QUESTIONS));
+    dispatch(updateReduxStore(unAnsweredQuestions, SET_UNANSWERED_QUESTIONS))
+    dispatch(updateReduxStore(user, ADD_CURRENT_USER))
   })
 );
 
-export const addCurrentUser = (user) => dispatch => (
-  dispatch(updateReduxStore(user, ADD_CURRENT_USER))
+// export const addCurrentUser = (user) => dispatch => (
+//   dispatch(updateReduxStore(user, ADD_CURRENT_USER))
+// )
+
+export const addCurrentPoll = (poll) => dispatch => (
+  dispatch(updateReduxStore(poll, ADD_CURRENT_POLL))
 )
