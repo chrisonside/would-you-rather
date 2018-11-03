@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 
 import {
   // getQuestions,
-  addCurrentPoll,
+  // addCurrentPoll,
+  setUserAndQuestions
 } from '../actions';
 
 import { isArrayEmpty } from '../utils/helper';
@@ -16,10 +17,9 @@ class PollList extends Component {
     showAnswered: false
   }
 
-  // Populate users data in Redux Store - the store update will trigger a rerender
-  // componentDidMount() {
-  //   this.props.getQuestions(this.props.loggedInUser);
-  // }
+  componentDidMount() {
+    this.props.setUserAndQuestions(this.props.loggedInUser);
+  }
 
   displayAnswered(bool) {
     if (bool === this.state.showAnswered) {
@@ -29,10 +29,6 @@ class PollList extends Component {
         showAnswered: !prevState.showAnswered
       }))
     }
-  }
-
-  updateCurrentPoll(poll) {
-    this.props.addCurrentPoll(poll);
   }
 
   render() {
@@ -54,10 +50,7 @@ class PollList extends Component {
                   <p className='pollist__question-title'>
                     {question.optionOne.text} or {question.optionTwo.text}
                   </p>
-                  <Link
-                    to={`/${question.id}`}
-                    className='pollist__link'
-                    onClick={() => this.updateCurrentPoll(question)}>
+                  <Link to={`/${question.id}`} className='pollist__link'>
                       See poll details
                   </Link>
                 </div>
@@ -97,9 +90,9 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
   const notAnswered = prepData(unAnsweredQuestions);
 
   return {
+    loggedInUser,
     answered,
     notAnswered,
-    loggedInUser
   }
 
 }
@@ -108,7 +101,8 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
 function mapDispatchToProps(dispatch) {
   return {
     // getQuestions: (user) => dispatch(getQuestions(user)),
-    addCurrentPoll: (poll) => dispatch(addCurrentPoll(poll)),
+    // addCurrentPoll: (poll) => dispatch(addCurrentPoll(poll)),
+    setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user))
   }
 }
 

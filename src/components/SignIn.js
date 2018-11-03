@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { isArrayEmpty } from '../utils/helper';
 
 import {
   getUsers,
-  // addCurrentUser
-  setUserAndQuestions,
+  addCurrentUser,
+  // setUserAndQuestions,
 } from '../actions';
-
-import { isArrayEmpty } from '../utils/helper';
 
 class SignIn extends Component {
 
@@ -25,7 +24,9 @@ class SignIn extends Component {
   handleUserSelection(e) {
     const userNameSelected = e.target.getAttribute('data-user');
     const userDetails = this.props.usersObject[userNameSelected];
-    this.props.setUserAndQuestions(userDetails);
+    // this.props.setUserAndQuestions(userDetails);
+    console.log(userDetails);
+    this.props.addCurrentUser(userDetails);
   }
 
   render() {
@@ -59,7 +60,7 @@ function mapStateToProps( {users} ) {
 
   /*  Convert users from Redux store's object format to an array, for easy looping over in UI */
   let usersArray = null;
-  if(users) {
+  if(!isArrayEmpty(users)) {
     let objectKeys = [Object.keys(users)];
     usersArray = [];
     objectKeys[0].map((objKey) => {
@@ -78,7 +79,8 @@ function mapStateToProps( {users} ) {
 function mapDispatchToProps(dispatch) {
   return {
     getUsers: () => dispatch(getUsers()),
-    setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user))
+    // setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user))
+    addCurrentUser: (user) => dispatch(addCurrentUser(user)),
   }
 }
 

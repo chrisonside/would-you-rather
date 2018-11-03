@@ -10,6 +10,7 @@ export const ADD_CURRENT_USER = 'ADD_CURRENT_USER';
 export const SAVE_QUESTION = 'SAVE_QUESTION';
 export const SAVE_ANSWER  = 'SAVE_ANSWER';
 export const ADD_CURRENT_POLL = 'ADD_CURRENT_POLL';
+export const CLEAR_CURRENT_POLL = 'CLEAR_CURRENT_POLL';
 
 /*
   *
@@ -52,14 +53,28 @@ export const setUserAndQuestions = (user) => dispatch => (
     dispatch(updateReduxStore(questions, SET_ALL_QUESTIONS));
     dispatch(updateReduxStore(answeredQuestions, SET_ANSWERED_QUESTIONS));
     dispatch(updateReduxStore(unAnsweredQuestions, SET_UNANSWERED_QUESTIONS))
-    dispatch(updateReduxStore(user, ADD_CURRENT_USER))
+    // dispatch(updateReduxStore(user, ADD_CURRENT_USER))
   })
 );
 
-// export const addCurrentUser = (user) => dispatch => (
-//   dispatch(updateReduxStore(user, ADD_CURRENT_USER))
-// )
-
-export const addCurrentPoll = (poll) => dispatch => (
-  dispatch(updateReduxStore(poll, ADD_CURRENT_POLL))
+export const addCurrentUser = (user) => dispatch => (
+  dispatch(updateReduxStore(user, ADD_CURRENT_USER))
 )
+
+// export const addCurrentPoll = (poll) => dispatch => (
+//   dispatch(updateReduxStore(poll, ADD_CURRENT_POLL))
+// );
+
+export const setCurrentPoll = (pollId) => dispatch => (
+  API
+  ._getQuestions()
+  .then(questions => {
+    const currentPoll = questions[pollId];
+    console.log('this one');
+    dispatch(updateReduxStore(currentPoll, ADD_CURRENT_POLL))
+  })
+);
+
+export const clearCurrentPoll = () => dispatch => (
+  dispatch(updateReduxStore({}, CLEAR_CURRENT_POLL))
+);
