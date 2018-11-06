@@ -89,6 +89,8 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
   const answered = prepData(answeredQuestions);
   const notAnswered = prepData(unAnsweredQuestions);
 
+  // console.log(answered);
+
   return {
     loggedInUser,
     answered,

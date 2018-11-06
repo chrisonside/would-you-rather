@@ -7,8 +7,6 @@ import '../styles/app.css';
 
 import Home from './Home';
 import SignIn from './SignIn';
-import UserDetails from './UserDetails';
-import PollList from './PollList';
 import AddPoll from './AddPoll';
 import Leaderboard from './Leaderboard';
 import Poll from './Poll';
