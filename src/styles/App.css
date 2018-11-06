@@ -84,3 +84,9 @@ body {
 .pollist--false .polllist__toggle--notanswered {
   background: limegreen;
 }
+
+/* Poll page styles */
+
+.poll__option--selected {
+  background: lime;
+}

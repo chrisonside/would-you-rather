@@ -1,5 +1,4 @@
 import * as API from '../data/_DATA.js';
-import { arrayToObject } from '../utils/helper';
 
 // Set up constants - these are exported to reducers
 export const SET_USERS = 'SET_USERS';
@@ -61,16 +60,11 @@ export const addCurrentUser = (user) => dispatch => (
   dispatch(updateReduxStore(user, ADD_CURRENT_USER))
 )
 
-// export const addCurrentPoll = (poll) => dispatch => (
-//   dispatch(updateReduxStore(poll, ADD_CURRENT_POLL))
-// );
-
 export const setCurrentPoll = (pollId) => dispatch => (
   API
   ._getQuestions()
   .then(questions => {
     const currentPoll = questions[pollId];
-    console.log('this one');
     dispatch(updateReduxStore(currentPoll, ADD_CURRENT_POLL))
   })
 );
