@@ -6,6 +6,7 @@ import { isObjectEmpty } from '../utils/helper';
 import '../styles/app.css';
 
 import Home from './Home';
+import Nav from './Nav';
 import SignIn from './SignIn';
 import AddPoll from './AddPoll';
 import Leaderboard from './Leaderboard';
@@ -19,17 +20,18 @@ class App extends Component {
     return (
       <div className="App">
 
+        <Nav></Nav>
+
         {isObjectEmpty(loggedInUser) && <SignIn></SignIn>}
 
         {!isObjectEmpty(loggedInUser) &&
           <div>
-          <div>hello g</div>
-          <Switch>
-            <Route exact path='/' component={Home}/>
-            <Route path='/add-poll' component={AddPoll}/>
-            <Route path='/leaderboard' component={Leaderboard}/>
-            <Route path='/:id' component={Poll}/>
-          </Switch>
+            <Switch>
+              <Route exact path='/' component={Home}/>
+              <Route path='/add' component={AddPoll}/>
+              <Route path='/leaderboard' component={Leaderboard}/>
+              <Route path='/:id' component={Poll}/>
+            </Switch>
           </div>
         }
 

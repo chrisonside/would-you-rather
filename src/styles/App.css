@@ -90,3 +90,11 @@ body {
 .poll__option--selected {
   background: lime;
 }
+
+/* Nav styles */
+
+.nav__link {
+  margin: 0 10px;
+  text-decoration: none;
+  color: royalblue;
+}
