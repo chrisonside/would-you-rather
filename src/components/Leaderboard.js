@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isObjectEmpty } from '../utils/helper';
-import { Link } from 'react-router-dom';
 
 import { isArrayEmpty } from '../utils/helper';
 
