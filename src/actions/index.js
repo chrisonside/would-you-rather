@@ -72,3 +72,14 @@ export const setCurrentPoll = (pollId) => dispatch => (
 export const clearCurrentPoll = () => dispatch => (
   dispatch(updateReduxStore({}, CLEAR_CURRENT_POLL))
 );
+
+export const saveQuestion = () => dispatch => (
+  API
+  ._saveQuestion()
+  .then(savedQuestion => {
+    console.log(savedQuestion)
+    //Return Value: An object that has the following properties: id, author, optionOne, optionTwo, timestamp. More details about these properties:
+    // I have saved the question in the DB, now to add the question to the all questions/unanswered in my Redux store
+    // dispatch(updateReduxStore({}, ADD_QUESTION))
+  })
+);
