@@ -24,8 +24,6 @@ class SignIn extends Component {
   handleUserSelection(e) {
     const userNameSelected = e.target.getAttribute('data-user');
     const userDetails = this.props.usersObject[userNameSelected];
-    // this.props.setUserAndQuestions(userDetails);
-    // console.log(userDetails);
     this.props.addCurrentUser(userDetails);
   }
 
