@@ -10,6 +10,7 @@ export const SAVE_QUESTION = 'SAVE_QUESTION';
 export const SAVE_ANSWER  = 'SAVE_ANSWER';
 export const ADD_CURRENT_POLL = 'ADD_CURRENT_POLL';
 export const CLEAR_CURRENT_POLL = 'CLEAR_CURRENT_POLL';
+export const ADD_QUESTION = 'ADD_QUESTION';
 
 /*
   *
@@ -51,7 +52,7 @@ export const setUserAndQuestions = (user) => dispatch => (
     }
     dispatch(updateReduxStore(questions, SET_ALL_QUESTIONS));
     dispatch(updateReduxStore(answeredQuestions, SET_ANSWERED_QUESTIONS));
-    dispatch(updateReduxStore(unAnsweredQuestions, SET_UNANSWERED_QUESTIONS))
+    dispatch(updateReduxStore(unAnsweredQuestions, SET_UNANSWERED_QUESTIONS));
     // dispatch(updateReduxStore(user, ADD_CURRENT_USER))
   })
 );
@@ -64,8 +65,10 @@ export const setCurrentPoll = (pollId) => dispatch => (
   API
   ._getQuestions()
   .then(questions => {
-    const currentPoll = questions[pollId];
-    dispatch(updateReduxStore(currentPoll, ADD_CURRENT_POLL))
+    const notFound = { notFound404: true };
+    const dataIncludesPoll = (typeof questions[pollId] !== 'undefined');
+    const currentPoll = dataIncludesPoll ? questions[pollId] : notFound;
+    dispatch(updateReduxStore(currentPoll, ADD_CURRENT_POLL));
   })
 );
 
@@ -73,13 +76,13 @@ export const clearCurrentPoll = () => dispatch => (
   dispatch(updateReduxStore({}, CLEAR_CURRENT_POLL))
 );
 
-export const saveQuestion = () => dispatch => (
+export const saveQuestion = (question) => dispatch => (
   API
-  ._saveQuestion()
+  ._saveQuestion(question)
   .then(savedQuestion => {
     console.log(savedQuestion)
     //Return Value: An object that has the following properties: id, author, optionOne, optionTwo, timestamp. More details about these properties:
     // I have saved the question in the DB, now to add the question to the all questions/unanswered in my Redux store
-    // dispatch(updateReduxStore({}, ADD_QUESTION))
+    // dispatch(updateReduxStore(savedQuestion, ADD_QUESTION))
   })
 );
