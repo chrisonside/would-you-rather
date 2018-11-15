@@ -147,6 +147,10 @@ function formatQuestion ({ optionOneText, optionTwoText, author }) {
   }
 }
 
+/*
+  * Note - this function updates the app memory's questions & users objects.
+  * If this was a real app we'd be interacting with an actual database
+*/
 export function _saveQuestion (question) {
   return new Promise((res, rej) => {
     const authedUser = question.author;
