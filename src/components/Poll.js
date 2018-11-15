@@ -65,14 +65,19 @@ function buildPollOptionsObject(obj, obj2, loggedInUser) {
   const optionObj = {};
   const userId = loggedInUser.id;
   const pollTotalVotes = obj.votes.length + obj2.votes.length;
+  let voteRatio = 0;
   optionObj.className = '';
   optionObj.text = obj.text;
   if(obj.votes.includes(userId)) {
     optionObj.className = 'poll__option--selected';
   }
   optionObj.voteCount = obj.votes.length;
-  optionObj.votePercentage = (100 / pollTotalVotes) * obj.votes.length;
-  // console.log(optionObj);
+  voteRatio = (100 / pollTotalVotes) * obj.votes.length;
+  if(isNaN(voteRatio)) {
+    optionObj.votePercentage = 0;
+  } else {
+    optionObj.votePercentage = voteRatio;
+  }
   return optionObj;
 }
 
@@ -87,10 +92,7 @@ function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
     if(selectedPoll.hasOwnProperty('notFound404')){
       pageNotFound = true;
       isLoading = false;
-      // Then I will redirect to 404 page
-      console.log('this page doesnt exist');
     } else {
-      console.log('yeah it does so get to work');
       const optionOne = selectedPoll.optionOne;
       const optionTwo = selectedPoll.optionTwo;
       pollOptions.push(buildPollOptionsObject(optionOne, optionTwo, loggedInUser));
