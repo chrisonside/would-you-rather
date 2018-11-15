@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import {
   clearCurrentPoll,
@@ -23,9 +23,9 @@ class Nav extends Component {
   render() {
     return (
       <div className='nav'>
-        <Link to='/' className='nav__link' onClick={() => this.clearSelectedPoll()}>Polls</Link>
-        <Link to="/leaderboard" className="nav__link" onClick={() => this.clearSelectedPoll()}>Leaderboard</Link>
-        <Link to="/add" className="nav__link" onClick={() => this.clearSelectedPoll()}>Add Poll</Link>
+        <NavLink to='/' exact className='nav__link' activeClassName='nav__link--active' onClick={() => this.clearSelectedPoll()}>Polls</NavLink>
+        <NavLink to='/leaderboard' exact className='nav__link' activeClassName='nav__link--active' onClick={() => this.clearSelectedPoll()}>Leaderboard</NavLink>
+        <NavLink to='/add' exact className='nav__link' activeClassName='nav__link--active' onClick={() => this.clearSelectedPoll()}>Add Poll</NavLink>
       </div>
     );
   }
@@ -38,7 +38,10 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+// https://stackoverflow.com/questions/44129789/using-connect-from-react-redux-makes-navlinks-from-react-router-not-work
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
+  undefined,
+  { pure: false }
 )(Nav);

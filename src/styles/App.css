@@ -98,3 +98,7 @@ body {
   text-decoration: none;
   color: royalblue;
 }
+
+.nav__link--active {
+  color: tomato;
+}
