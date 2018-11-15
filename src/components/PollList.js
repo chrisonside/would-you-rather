@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import {
   // getQuestions,
-  // addCurrentPoll,
+  clearCurrentPoll,
   setUserAndQuestions
 } from '../actions';
 
@@ -17,7 +17,20 @@ class PollList extends Component {
     showAnswered: false
   }
 
+  clearSelectedPoll() {
+    this.props.clearCurrentPoll();
+  }
+
   componentDidMount() {
+    /*
+      * Handle user clicking back to poll list form poll.
+      * Clear selectedPoll, to avoid flash of content updating in future when user clicks on another poll
+    */
+    window.onpopstate = (e) => {
+      console.log('back button pressed');
+      this.clearSelectedPoll();
+    }
+
     this.props.setUserAndQuestions(this.props.loggedInUser);
   }
 
@@ -89,8 +102,6 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
   const answered = prepData(answeredQuestions);
   const notAnswered = prepData(unAnsweredQuestions);
 
-  // console.log(answered);
-
   return {
     loggedInUser,
     answered,
@@ -102,9 +113,8 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
 // Bind dispatch to the action creators required for this component - in this case, to populate my Store with my users
 function mapDispatchToProps(dispatch) {
   return {
-    // getQuestions: (user) => dispatch(getQuestions(user)),
-    // addCurrentPoll: (poll) => dispatch(addCurrentPoll(poll)),
-    setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user))
+    setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user)),
+    clearCurrentPoll: () => dispatch(clearCurrentPoll()),
   }
 }
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isObjectEmpty } from '../utils/helper';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import {
   setCurrentPoll,
@@ -9,6 +10,10 @@ import {
 } from '../actions';
 
 class Poll extends Component {
+
+  clearSelectedPoll() {
+    this.props.clearCurrentPoll();
+  }
 
   componentDidMount() {
     let pollId = window.location.pathname;
@@ -18,16 +23,25 @@ class Poll extends Component {
     }
   }
 
-  clearSelectedPoll() {
-    this.props.clearCurrentPoll();
-  }
-
   render() {
-    const { poll } = this.props;
+    const { poll, isLoading, pageNotFound } = this.props;
+
+    if(pageNotFound) {
+      return <Redirect to='/page-not-found' />;
+    }
 
     return (
       <div className='poll'>
-        {!isObjectEmpty(poll) &&
+        {isLoading &&
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height="100"
+            width="100"
+          />
+        }
+
+        {!isLoading &&
           <div>
             <p>Asked by:</p>
             <img className='poll__avatar' src={poll.authorAvatar} alt={poll.authorName} />
@@ -39,7 +53,7 @@ class Poll extends Component {
                 <p className='poll__percentage'>{option.votePercentage}</p>
               </div>
             ))}
-            <Link to='/' className='poll__link' onClick={() => this.clearSelectedPoll()}>Home</Link>
+            <Link to='/' className='poll__link' onClick={() => this.clearSelectedPoll()}>Back to polls</Link>
           </div>
         }
       </div>
@@ -58,28 +72,42 @@ function buildPollOptionsObject(obj, obj2, loggedInUser) {
   }
   optionObj.voteCount = obj.votes.length;
   optionObj.votePercentage = (100 / pollTotalVotes) * obj.votes.length;
+  // console.log(optionObj);
   return optionObj;
 }
 
-function mapStateToProps( {users, loggedInUser, selectedPoll} ) {
+function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
+  let isLoading = true;
   const poll = {};
   const pollOptions = [];
-  const optionOne = selectedPoll.optionOne;
-  const optionTwo = selectedPoll.optionTwo;
+  let pageNotFound = false;
+
 
   if(!isObjectEmpty(selectedPoll)){
-    pollOptions.push(buildPollOptionsObject(optionOne, optionTwo, loggedInUser));
-    pollOptions.push(buildPollOptionsObject(optionTwo, optionOne, loggedInUser));
-    poll.options = pollOptions;
-    if(!isObjectEmpty(users)) {
-      poll.authorAvatar = users[selectedPoll.author].avatarURL;
-      poll.authorName = users[selectedPoll.author].name;
+    if(selectedPoll.hasOwnProperty('notFound404')){
+      pageNotFound = true;
+      isLoading = false;
+      // Then I will redirect to 404 page
+      console.log('this page doesnt exist');
+    } else {
+      console.log('yeah it does so get to work');
+      const optionOne = selectedPoll.optionOne;
+      const optionTwo = selectedPoll.optionTwo;
+      pollOptions.push(buildPollOptionsObject(optionOne, optionTwo, loggedInUser));
+      pollOptions.push(buildPollOptionsObject(optionTwo, optionOne, loggedInUser));
+      poll.options = pollOptions;
+      if(!isObjectEmpty(users)) {
+        poll.authorAvatar = users[selectedPoll.author].avatarURL;
+        poll.authorName = users[selectedPoll.author].name;
+      }
+      isLoading = false;
     }
   }
 
   return {
-    loggedInUser,
+    isLoading,
     poll,
+    pageNotFound,
  }
 }
 

@@ -11,7 +11,6 @@ export function selectedPoll(selectedPoll = {}, action) {
         ...selectedPoll[0] = payload
       }
     case CLEAR_CURRENT_POLL :
-      console.log('being called');
       return {
         ...selectedPoll[0] = {}
       }
