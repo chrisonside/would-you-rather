@@ -26,7 +26,7 @@ const validate = val => {
     errors.optionTwo = 'Please enter an option here';
   }
   // Useful for debugging
-  console.log(errors);
+  // console.log(errors);
   return errors;
 }
 
@@ -49,7 +49,7 @@ class AddPoll extends Component {
     const question = {};
     question.optionOneText = values.optionOne;
     question.optionTwoText = values.optionTwo;
-    question.author = this.props.loggedInUser.name;
+    question.author = this.props.loggedInUser.id;
     console.log(question);
     this.props.saveQuestion(question);
   };
@@ -60,11 +60,6 @@ class AddPoll extends Component {
 
     return (
       <div>
-        <Link
-          to={`/`}
-          className='post__link'>
-            Back to polls
-        </Link>
         {(submitSucceeded) && (
           <div className="form__confirmation">
             <div className="form__success">Thanks! Your poll has been submitted!</div>
