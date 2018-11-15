@@ -76,13 +76,10 @@ export const clearCurrentPoll = () => dispatch => (
   dispatch(updateReduxStore({}, CLEAR_CURRENT_POLL))
 );
 
+/*
+  * Method to add new poll question to the app's javaScript memory
+*/
 export const saveQuestion = (question) => dispatch => (
   API
   ._saveQuestion(question)
-  .then(savedQuestion => {
-    console.log(savedQuestion)
-    //Return Value: An object that has the following properties: id, author, optionOne, optionTwo, timestamp. More details about these properties:
-    // I have saved the question in the DB, now to add the question to the all questions/unanswered in my Redux store
-    // dispatch(updateReduxStore(savedQuestion, ADD_QUESTION))
-  })
 );

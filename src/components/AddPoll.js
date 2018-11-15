@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TickSymbol from 'react-icons/lib/fa/check';
 import '../styles/app.css';
@@ -50,7 +50,6 @@ class AddPoll extends Component {
     question.optionOneText = values.optionOne;
     question.optionTwoText = values.optionTwo;
     question.author = this.props.loggedInUser.id;
-    console.log(question);
     this.props.saveQuestion(question);
   };
 
@@ -61,10 +60,7 @@ class AddPoll extends Component {
     return (
       <div>
         {(submitSucceeded) && (
-          <div className="form__confirmation">
-            <div className="form__success">Thanks! Your poll has been submitted!</div>
-            <TickSymbol className="form__icon" size={65}/>
-          </div>
+          <Redirect to='/' />
         )}
         {/* Object that includes the following properties: author, optionOneText, and optionTwoText */}
         {(!submitSucceeded) && (
