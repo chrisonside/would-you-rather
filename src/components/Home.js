@@ -9,7 +9,6 @@ class Home extends Component {
 
     return (
       <div className="Home">
-        <div>Home page!</div>
         <div>
           <UserDetails></UserDetails>
           <PollList></PollList>
