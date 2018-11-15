@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { isObjectEmpty } from '../utils/helper';
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import {
-  // getQuestions,
   clearCurrentPoll,
   setUserAndQuestions
 } from '../actions';
@@ -23,8 +23,8 @@ class PollList extends Component {
 
   componentDidMount() {
     /*
-      * Handle user clicking back to poll list form poll.
-      * Clear selectedPoll, to avoid flash of content updating in future when user clicks on another poll
+      * Handle user clicking back button to poll list from poll.
+      * Clearing selectedPoll now avoids flash of old post when user clicks on another poll in future
     */
     window.onpopstate = (e) => {
       console.log('back button pressed');
@@ -52,8 +52,19 @@ class PollList extends Component {
 
     return (
       <div className={`pollist pollist--${showAnswered}`}>
+
+        {isArrayEmpty(answersToDisplay) &&
+          <Loader
+            type="Puff"
+            color="#00BFFF"
+            height="100"
+            width="100"
+          />
+        }
+
         <div className='polllist__toggle polllist__toggle--answered' onClick={() => this.displayAnswered(true)}>Answered</div>
         <div className='polllist__toggle polllist__toggle--notanswered' onClick={() => this.displayAnswered(false)}>Not answered</div>
+
         {!isArrayEmpty(answersToDisplay) && (
           <div>
             <div className='pollist__questions'>
@@ -71,6 +82,7 @@ class PollList extends Component {
             </div>
           </div>
         )}
+
       </div>
     );
   }
