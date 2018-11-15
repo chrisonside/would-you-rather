@@ -19,12 +19,12 @@ class Poll extends Component {
     let pollId = window.location.pathname;
     while(pollId.charAt(0) === '/'){
       pollId = pollId.substr(1);
-      this.props.setCurrentPoll(pollId);
+      this.props.setCurrentPoll(pollId, this.props.loggedInUser);
     }
   }
 
   render() {
-    const { poll, isLoading, pageNotFound } = this.props;
+    const { poll, userAnswered, isLoading, pageNotFound } = this.props;
 
     if(pageNotFound) {
       return <Redirect to='/page-not-found' />;
@@ -50,7 +50,10 @@ class Poll extends Component {
               <div key={i} className={`poll__option ${option.className}`}>
                 <p className='poll__text'>{option.text}</p>
                 <p className='poll__count'>{option.voteCount}</p>
-                <p className='poll__percentage'>{option.votePercentage}</p>
+                <p className='poll__percentage'>{option.votePercentage}%</p>
+                {!userAnswered &&
+                  <div className=''>Vote for {i}!</div>
+                }
               </div>
             ))}
             <Link to='/' className='poll__link' onClick={() => this.clearSelectedPoll()}>Back to polls</Link>
@@ -83,10 +86,10 @@ function buildPollOptionsObject(obj, obj2, loggedInUser) {
 
 function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
   let isLoading = true;
+  let pageNotFound = false;
+  let userAnswered = false;
   const poll = {};
   const pollOptions = [];
-  let pageNotFound = false;
-
 
   if(!isObjectEmpty(selectedPoll)){
     if(selectedPoll.hasOwnProperty('notFound404')){
@@ -95,6 +98,7 @@ function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
     } else {
       const optionOne = selectedPoll.optionOne;
       const optionTwo = selectedPoll.optionTwo;
+      userAnswered = selectedPoll.hasOwnProperty('userAnswer');
       pollOptions.push(buildPollOptionsObject(optionOne, optionTwo, loggedInUser));
       pollOptions.push(buildPollOptionsObject(optionTwo, optionOne, loggedInUser));
       poll.options = pollOptions;
@@ -107,7 +111,9 @@ function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
   }
 
   return {
+    loggedInUser,
     isLoading,
+    userAnswered,
     poll,
     pageNotFound,
  }
@@ -115,7 +121,7 @@ function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setCurrentPoll: (poll) => dispatch(setCurrentPoll(poll)),
+    setCurrentPoll: (pollId, user) => dispatch(setCurrentPoll(pollId, user)),
     clearCurrentPoll: () => dispatch(clearCurrentPoll()),
   }
 }

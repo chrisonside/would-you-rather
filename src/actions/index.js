@@ -1,4 +1,5 @@
 import * as API from '../data/_DATA.js';
+import { isObjectEmpty } from '../utils/helper.js';
 
 // Set up constants - these are exported to reducers
 export const SET_USERS = 'SET_USERS';
@@ -61,13 +62,16 @@ export const addCurrentUser = (user) => dispatch => (
   dispatch(updateReduxStore(user, ADD_CURRENT_USER))
 )
 
-export const setCurrentPoll = (pollId) => dispatch => (
+export const setCurrentPoll = (pollId, user) => dispatch => (
   API
   ._getQuestions()
   .then(questions => {
     const notFound = { notFound404: true };
     const dataIncludesPoll = (typeof questions[pollId] !== 'undefined');
     const currentPoll = dataIncludesPoll ? questions[pollId] : notFound;
+    if(dataIncludesPoll && user.answers[pollId]){
+      currentPoll.userAnswer = user.answers[pollId];
+    }
     dispatch(updateReduxStore(currentPoll, ADD_CURRENT_POLL));
   })
 );
