@@ -8,6 +8,7 @@ import '../styles/app.css';
 import Home from './Home';
 import Nav from './Nav';
 import SignIn from './SignIn';
+import NotFound from './NotFound';
 import AddPoll from './AddPoll';
 import Leaderboard from './Leaderboard';
 import Poll from './Poll';
@@ -28,9 +29,11 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact path='/' component={Home}/>
-              <Route path='/add' component={AddPoll}/>
-              <Route path='/leaderboard' component={Leaderboard}/>
-              <Route path='/:id' component={Poll}/>
+              <Route exact path='/add' component={AddPoll}/>
+              <Route exact path='/page-not-found' component={NotFound}/>
+              <Route exact path='/leaderboard' component={Leaderboard}/>
+              <Route exact path='/:id' component={Poll}/>
+              <Route path="*" component={NotFound} />
             </Switch>
           </div>
         }
