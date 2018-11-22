@@ -36,7 +36,6 @@ export function users(usersState = {}, action) {
       return {
         ...usersState[0] = payload
       }
-      // NOTE - THE REDUX SHAPE MIGHT BE DIFFERENT
     case UPDATE_USER_ANSWERS :
       return {
         ...usersState,

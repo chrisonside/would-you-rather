@@ -78,32 +78,20 @@ export const saveQuestion = (question) => dispatch => (
   API
   ._saveQuestion(question)
 );
-// OK UP TO HERE _ NEED TO NOT USE APP MEMORY BUT USE REDUX STORE AS PER THE INSTRUCTIONS! MAKE IT EXPLICIT AND EDIT PREV METHOD THAT RELIES ON APP MEMORY (collateUserAnswers)
-// ACTUALLY SCREW THAT!!! THE API DATABASE RETURNS NOTHING, AS OPPOSED TO THE  (collateUserAnswers) which did and so worked just fine lol
-
-// users = {
-// tylermcginnis: {
-//   id: 'tylermcginnis',
-//   answers: {
-//     "vthrdm985a262al8qx3do": 'optionOne',
-//     "xj352vofupe1dqz9emx13r": 'optionTwo',
-//   },
-
-  // questions = {
-  //   "8xf0y6ziyjabvozdd253nd": {
-  //     id: '8xf0y6ziyjabvozdd253nd',
-  //     optionOne: {
-  //       votes: ['sarahedo'],
-
 
 /*
   * Vote in poll
   * As spoofing a database, adds vote to the app's javaScript memory
 */
-export const saveVote = (vote) => dispatch => (
+export const saveVoteToDb = (vote) => dispatch => (
   API
   ._saveQuestionAnswer(vote).then(() => {
-    dispatch(updateReduxStore(vote, UPDATE_USER_ANSWERS));
-    dispatch(updateReduxStore(vote, UPDATE_QUESTION_VOTES));
+    // dispatch(updateReduxStore(vote, UPDATE_USER_ANSWERS));
+    // dispatch(updateReduxStore(vote, UPDATE_QUESTION_VOTES));
   })
+);
+
+export const saveVoteInStore = (vote) => dispatch => (
+  dispatch(updateReduxStore(vote, UPDATE_USER_ANSWERS)),
+  dispatch(updateReduxStore(vote, UPDATE_QUESTION_VOTES))
 );

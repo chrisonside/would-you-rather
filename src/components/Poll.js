@@ -8,7 +8,8 @@ import {
   setCurrentPollId,
   clearCurrentPoll,
   collateUserAnswers,
-  saveVote,
+  saveVoteToDb,
+  saveVoteInStore,
 } from '../actions';
 
 class Poll extends Component {
@@ -24,7 +25,8 @@ class Poll extends Component {
       answer: selection
     }
     // console.log(this.props.loggedInUser.id, this.props.poll.id, selection);
-    this.props.saveVote(vote);
+    this.props.saveVoteToDb(vote);
+    this.props.saveVoteInStore(vote);
   }
 
   componentDidMount() {
@@ -154,7 +156,8 @@ function mapDispatchToProps(dispatch) {
     setCurrentPollId: (pollId) => dispatch(setCurrentPollId(pollId)),
     clearCurrentPoll: () => dispatch(clearCurrentPoll()),
     collateUserAnswers: (user) => dispatch(collateUserAnswers(user)),
-    saveVote: (userId, questionId, answer) => dispatch(saveVote(userId, questionId, answer)),
+    saveVoteToDb: (userId, questionId, answer) => dispatch(saveVoteToDb(userId, questionId, answer)),
+    saveVoteInStore: (userId, questionId, answer) => dispatch(saveVoteInStore(userId, questionId, answer)),
   }
 }
 
