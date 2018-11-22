@@ -6,6 +6,7 @@ import { isObjectEmpty } from '../utils/helper';
 import '../styles/app.css';
 
 import Home from './Home';
+import UserDetails from './UserDetails';
 import Nav from './Nav';
 import SignIn from './SignIn';
 import NotFound from './NotFound';
@@ -27,6 +28,7 @@ class App extends Component {
 
         {!isObjectEmpty(loggedInUser) &&
           <div>
+            <UserDetails></UserDetails>
             <Switch>
               <Route exact path='/' component={Home}/>
               <Route exact path='/add' component={AddPoll}/>

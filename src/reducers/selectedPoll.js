@@ -1,14 +1,15 @@
 import {
-  ADD_CURRENT_POLL,
+  SET_CURRENT_POLL_ID,
   CLEAR_CURRENT_POLL,
 } from '../actions';
 
 export function selectedPoll(selectedPoll = {}, action) {
   const { payload } = action;
   switch (action.type) {
-    case ADD_CURRENT_POLL :
+    case SET_CURRENT_POLL_ID :
       return {
-        ...selectedPoll[0] = payload
+        ...selectedPoll,
+        id: payload
       }
     case CLEAR_CURRENT_POLL :
       return {

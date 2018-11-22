@@ -5,8 +5,10 @@ import { Link, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 
 import {
-  setCurrentPoll,
+  setCurrentPollId,
   clearCurrentPoll,
+  collateUserAnswers,
+  saveVote,
 } from '../actions';
 
 class Poll extends Component {
@@ -15,16 +17,32 @@ class Poll extends Component {
     this.props.clearCurrentPoll();
   }
 
+  voteInPoll(selection) {
+    const vote = {
+      authedUser: this.props.loggedInUser.id,
+      qid: this.props.poll.id,
+      answer: selection
+    }
+    // console.log(this.props.loggedInUser.id, this.props.poll.id, selection);
+    this.props.saveVote(vote);
+  }
+
   componentDidMount() {
+    // Set the currentPoll from the id in the URL
     let pollId = window.location.pathname;
     while(pollId.charAt(0) === '/'){
       pollId = pollId.substr(1);
-      this.props.setCurrentPoll(pollId, this.props.loggedInUser);
+      this.props.setCurrentPollId(pollId);
     }
+    // If they've landed fresh on this page, grab users' answered questions data too
+    if(isObjectEmpty(this.props.allQuestions)){
+      this.props.collateUserAnswers(this.props.loggedInUser);
+    }
+
   }
 
   render() {
-    const { poll, userAnswered, isLoading, pageNotFound } = this.props;
+    const { loggedInUser, isLoading, userAnsweredPoll, poll, pageNotFound, } = this.props;
 
     if(pageNotFound) {
       return <Redirect to='/page-not-found' />;
@@ -51,8 +69,8 @@ class Poll extends Component {
                 <p className='poll__text'>{option.text}</p>
                 <p className='poll__count'>{option.voteCount}</p>
                 <p className='poll__percentage'>{option.votePercentage}%</p>
-                {!userAnswered &&
-                  <div className=''>Vote for {i}!</div>
+                {!userAnsweredPoll &&
+                  <button className='poll__vote' onClick={() => this.voteInPoll(option.optionName)}>{`Vote for ${option.optionName}!`}</button>
                 }
               </div>
             ))}
@@ -64,11 +82,12 @@ class Poll extends Component {
   }
 }
 
-function buildPollOptionsObject(obj, obj2, loggedInUser) {
+function buildPollOptionsObject(obj, obj2, loggedInUser, name) {
   const optionObj = {};
   const userId = loggedInUser.id;
   const pollTotalVotes = obj.votes.length + obj2.votes.length;
   let voteRatio = 0;
+  optionObj.optionName = name;
   optionObj.className = '';
   optionObj.text = obj.text;
   if(obj.votes.includes(userId)) {
@@ -84,24 +103,34 @@ function buildPollOptionsObject(obj, obj2, loggedInUser) {
   return optionObj;
 }
 
-function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
+function mapStateToProps( { users, loggedInUser, allQuestions, selectedPoll } ) {
+
   let isLoading = true;
   let pageNotFound = false;
-  let userAnswered = false;
-  const poll = {};
+  let userAnsweredPoll = false;
+  let poll = {};
   const pollOptions = [];
 
-  if(!isObjectEmpty(selectedPoll)){
-    if(selectedPoll.hasOwnProperty('notFound404')){
+  if(!isObjectEmpty(selectedPoll) && !isObjectEmpty(allQuestions)){
+    const pollId = selectedPoll.id;
+    // If this poll id does not exist, 404
+    if(typeof allQuestions[pollId] === 'undefined'){
       pageNotFound = true;
       isLoading = false;
     } else {
+      // First grab the details for the poll
+      let selectedPoll = allQuestions[pollId];
       const optionOne = selectedPoll.optionOne;
       const optionTwo = selectedPoll.optionTwo;
-      userAnswered = selectedPoll.hasOwnProperty('userAnswer');
-      pollOptions.push(buildPollOptionsObject(optionOne, optionTwo, loggedInUser));
-      pollOptions.push(buildPollOptionsObject(optionTwo, optionOne, loggedInUser));
+      // Now create the cleaner poll object we'll use in the render
+      pollOptions.push(buildPollOptionsObject(optionOne, optionTwo, loggedInUser, 'optionOne'));
+      pollOptions.push(buildPollOptionsObject(optionTwo, optionOne, loggedInUser, 'optionTwo'));
       poll.options = pollOptions;
+      poll.id = selectedPoll.id;
+      if(loggedInUser.answers[pollId]){
+        poll.userAnswer = loggedInUser.answers[pollId];
+        userAnsweredPoll = true;
+      }
       if(!isObjectEmpty(users)) {
         poll.authorAvatar = users[selectedPoll.author].avatarURL;
         poll.authorName = users[selectedPoll.author].name;
@@ -112,17 +141,20 @@ function mapStateToProps( { users, loggedInUser, selectedPoll } ) {
 
   return {
     loggedInUser,
-    isLoading,
-    userAnswered,
-    poll,
     pageNotFound,
+    userAnsweredPoll,
+    isLoading,
+    poll,
+    allQuestions,
  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setCurrentPoll: (pollId, user) => dispatch(setCurrentPoll(pollId, user)),
+    setCurrentPollId: (pollId) => dispatch(setCurrentPollId(pollId)),
     clearCurrentPoll: () => dispatch(clearCurrentPoll()),
+    collateUserAnswers: (user) => dispatch(collateUserAnswers(user)),
+    saveVote: (userId, questionId, answer) => dispatch(saveVote(userId, questionId, answer)),
   }
 }
 

@@ -40,7 +40,6 @@ function mapStateToProps( {users} ) {
     const usersObjClone = JSON.parse(JSON.stringify(users))
     usersArray = convertToArray(usersObjClone);
     usersArray.forEach(function(item, index){
-      /* ISSUES HERE WITH MUTATING ORIGINAL ITEM (USERS.ANSWERs and USERS.QUESTIONS) */
       item.questions = item.questions.length;
       item.answers = Object.keys(item.answers).length;
       item.score = item.questions + item.answers;

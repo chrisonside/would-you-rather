@@ -5,7 +5,6 @@ import { isArrayEmpty } from '../utils/helper';
 import {
   getUsers,
   addCurrentUser,
-  // setUserAndQuestions,
 } from '../actions';
 
 class SignIn extends Component {
@@ -77,7 +76,6 @@ function mapStateToProps( {users} ) {
 function mapDispatchToProps(dispatch) {
   return {
     getUsers: () => dispatch(getUsers()),
-    // setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user))
     addCurrentUser: (user) => dispatch(addCurrentUser(user)),
   }
 }

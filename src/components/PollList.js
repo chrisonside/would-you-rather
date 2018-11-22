@@ -6,7 +6,7 @@ import Loader from 'react-loader-spinner';
 
 import {
   clearCurrentPoll,
-  setUserAndQuestions
+  collateUserAnswers
 } from '../actions';
 
 import { isArrayEmpty } from '../utils/helper';
@@ -22,6 +22,7 @@ class PollList extends Component {
   }
 
   componentDidMount() {
+    console.log('pollList being remounted');
     /*
       * Handle user clicking back button to poll list from poll.
       * Clearing selectedPoll now avoids flash of old post when user clicks on another poll in future
@@ -31,9 +32,13 @@ class PollList extends Component {
       this.clearSelectedPoll();
     }
 
-    this.props.setUserAndQuestions(this.props.loggedInUser);
+    // Note that loggedInUser has to already be set to view this component
+    this.props.collateUserAnswers(this.props.loggedInUser);
   }
 
+  /*
+    * Function to toggle between answered and unanswered questions
+  */
   displayAnswered(bool) {
     if (bool === this.state.showAnswered) {
       return;
@@ -101,7 +106,7 @@ function compareTimestamp(a,b) {
   return 0;
 }
 
-function prepData(object) {
+function convertToArrayAndSort(object) {
   let newArray = [];
   if(!isObjectEmpty(object)) {
     newArray = convertToArray(object).sort(compareTimestamp);
@@ -109,10 +114,9 @@ function prepData(object) {
   return newArray;
 }
 
-// Format shape of store data for this component
 function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions} ) {
-  const answered = prepData(answeredQuestions);
-  const notAnswered = prepData(unAnsweredQuestions);
+  const answered = convertToArrayAndSort(answeredQuestions);
+  const notAnswered = convertToArrayAndSort(unAnsweredQuestions);
 
   return {
     loggedInUser,
@@ -125,7 +129,7 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
 // Bind dispatch to the action creators required for this component - in this case, to populate my Store with my users
 function mapDispatchToProps(dispatch) {
   return {
-    setUserAndQuestions: (user) => dispatch(setUserAndQuestions(user)),
+    collateUserAnswers: (user) => dispatch(collateUserAnswers(user)),
     clearCurrentPoll: () => dispatch(clearCurrentPoll()),
   }
 }
