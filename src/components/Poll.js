@@ -84,19 +84,19 @@ class Poll extends Component {
   }
 }
 
-function buildPollOptionsObject(obj, obj2, loggedInUser, name) {
+function buildPollOptionsObject(optionOne, optionTwo, loggedInUser, name) {
   const optionObj = {};
   const userId = loggedInUser.id;
-  const pollTotalVotes = obj.votes.length + obj2.votes.length;
+  const pollTotalVotes = optionOne.votes.length + optionTwo.votes.length;
   let voteRatio = 0;
   optionObj.optionName = name;
   optionObj.className = '';
-  optionObj.text = obj.text;
-  if(obj.votes.includes(userId)) {
+  optionObj.text = optionOne.text;
+  if(optionOne.votes.includes(userId)) {
     optionObj.className = 'poll__option--selected';
   }
-  optionObj.voteCount = obj.votes.length;
-  voteRatio = (100 / pollTotalVotes) * obj.votes.length;
+  optionObj.voteCount = optionOne.votes.length;
+  voteRatio = (100 / pollTotalVotes) * optionOne.votes.length;
   if(isNaN(voteRatio)) {
     optionObj.votePercentage = 0;
   } else {
