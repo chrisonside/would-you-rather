@@ -69,10 +69,14 @@ class Poll extends Component {
             {poll.options.map((option, i) => (
               <div key={i} className={`poll__option ${option.className}`}>
                 <p className='poll__text'>{option.text}</p>
-                <p className='poll__count'>{option.voteCount}</p>
-                <p className='poll__percentage'>{option.votePercentage}%</p>
                 {!userAnsweredPoll &&
                   <button className='poll__vote' onClick={() => this.voteInPoll(option.optionName)}>{`Vote for ${option.optionName}!`}</button>
+                }
+                {userAnsweredPoll &&
+                  <div>
+                    <p className='poll__count'>{option.voteCount} other people agreed!</p>
+                    <p className='poll__percentage'>That's {option.votePercentage}% of people surveyed.</p>
+                  </div>
                 }
               </div>
             ))}
@@ -97,6 +101,7 @@ function buildPollOptionsObject(optionOne, optionTwo, loggedInUser, name) {
   }
   optionObj.voteCount = optionOne.votes.length;
   voteRatio = (100 / pollTotalVotes) * optionOne.votes.length;
+  voteRatio = Math.round(voteRatio * 100) / 100;
   if(isNaN(voteRatio)) {
     optionObj.votePercentage = 0;
   } else {

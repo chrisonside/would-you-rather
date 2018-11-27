@@ -1,42 +1,18 @@
 import {
   SET_USERS,
-  UPDATE_USER_ANSWERS,
+  UPDATE_LOGGEDIN_USER_ANSWERS,
+  UPDATE_USER_QUESTIONS
 } from '../actions';
-
-// users = {
-// tylermcginnis: {
-//   id: 'tylermcginnis',
-//   answers: {
-//     "vthrdm985a262al8qx3do": 'optionOne',
-//     "xj352vofupe1dqz9emx13r": 'optionTwo',
-//   },
-
-// state.first.second[someId].fourth
-// users.user.answers[qid]
-
-// console.log(authedUser, qid, answer);
-
-// function updateVeryNestedField(usersState = {}, payload) {
-//   return {
-//     ...usersState,
-//     [authedUser]: {
-//       ...usersState[authedUser],
-//       answers: {
-//         ...usersState[authedUser].answers,
-//         [payload.qid]: payload.answer
-//       }
-//     }
-//   }
-// }
 
 export function users(usersState = {}, action) {
   const { payload } = action;
+  console.log(payload);
   switch (action.type) {
     case SET_USERS :
       return {
         ...usersState[0] = payload
       }
-    case UPDATE_USER_ANSWERS :
+    case UPDATE_LOGGEDIN_USER_ANSWERS :
       return {
         ...usersState,
           [payload.authedUser]: {
@@ -47,6 +23,15 @@ export function users(usersState = {}, action) {
             }
           }
       }
+      case UPDATE_USER_QUESTIONS :
+      return {
+        ...usersState,
+          [payload.author]: {
+            ...usersState[payload.author],
+            questions: [...usersState[payload.author].questions,
+              payload.id]
+          }
+        }
     default :
       return usersState
     }

@@ -13,8 +13,10 @@ export const SET_CURRENT_POLL_ID = 'SET_CURRENT_POLL_ID';
 export const CLEAR_CURRENT_POLL = 'CLEAR_CURRENT_POLL';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const ADD_VOTE = 'ADD_VOTE';
-export const UPDATE_USER_ANSWERS = 'UPDATE_USER_ANSWERS';
 export const UPDATE_QUESTION_VOTES = 'UPDATE_QUESTION_VOTES';
+export const UPDATE_USER_QUESTIONS = 'UPDATE_USER_QUESTIONS';
+export const UPDATE_LOGGEDIN_USER_ANSWERS = 'UPDATE_LOGGEDIN_USER_ANSWERS';
+export const UPDATE_LOGGEDIN_USER_QUESTIONS = 'UPDATE_LOGGEDIN_USER_QUESTIONS';
 
 /*
   *
@@ -73,11 +75,23 @@ export const clearCurrentPoll = () => dispatch => (
 /*
   * Method to add new poll question
   * As we are spoofing a database, simply adds question to the app's javaScript memory
+  * Note that this redirects to home page afterwards, so calling collateUserAnswers
 */
 export const saveQuestion = (question) => dispatch => (
   API
   ._saveQuestion(question)
+  .then(savedQuestion => {
+    console.log(savedQuestion);
+    dispatch(updateReduxStore(savedQuestion, UPDATE_USER_QUESTIONS)),
+    dispatch(updateReduxStore(savedQuestion, UPDATE_LOGGEDIN_USER_QUESTIONS))
+  })
 );
+// /*
+//   * Also update the Redux store
+// */
+// export const saveQuestionToUser = (vote) => dispatch => (
+//   dispatch(updateReduxStore(vote, UPDATE_USER_QUESTIONS))
+// );
 
 /*
   * Vote in poll
@@ -85,13 +99,26 @@ export const saveQuestion = (question) => dispatch => (
 */
 export const saveVoteToDb = (vote) => dispatch => (
   API
-  ._saveQuestionAnswer(vote).then(() => {
-    // dispatch(updateReduxStore(vote, UPDATE_USER_ANSWERS));
-    // dispatch(updateReduxStore(vote, UPDATE_QUESTION_VOTES));
-  })
+  ._saveQuestionAnswer(vote)
 );
-
+/*
+  * Also update the Redux store
+*/
 export const saveVoteInStore = (vote) => dispatch => (
-  dispatch(updateReduxStore(vote, UPDATE_USER_ANSWERS)),
+  dispatch(updateReduxStore(vote, UPDATE_LOGGEDIN_USER_ANSWERS)),
   dispatch(updateReduxStore(vote, UPDATE_QUESTION_VOTES))
 );
+
+// export const getPostAndCommentsById = (id) => dispatch => (
+//   API
+//   .getPostById(id)
+//   .then(post => {
+//     API
+//     .getCommentsById(id)
+//     .then(comments => {
+//       const keyedComments = arrayToObject(comments, 'id');
+//       post['comments'] = keyedComments;
+//       dispatch(updateReduxStore(post, GET_POST_AND_COMMENTS_BY_ID))
+//     })
+//   })
+// );

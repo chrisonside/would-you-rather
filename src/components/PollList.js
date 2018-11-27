@@ -58,6 +58,9 @@ class PollList extends Component {
     return (
       <div className={`pollist pollist--${showAnswered}`}>
 
+        <div className='polllist__toggle polllist__toggle--answered' onClick={() => this.displayAnswered(true)}>Answered</div>
+        <div className='polllist__toggle polllist__toggle--notanswered' onClick={() => this.displayAnswered(false)}>Not answered</div>
+
         {isArrayEmpty(answersToDisplay) &&
           <Loader
             type="Puff"
@@ -66,9 +69,6 @@ class PollList extends Component {
             width="100"
           />
         }
-
-        <div className='polllist__toggle polllist__toggle--answered' onClick={() => this.displayAnswered(true)}>Answered</div>
-        <div className='polllist__toggle polllist__toggle--notanswered' onClick={() => this.displayAnswered(false)}>Not answered</div>
 
         {!isArrayEmpty(answersToDisplay) && (
           <div>
