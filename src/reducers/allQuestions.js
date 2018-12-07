@@ -3,9 +3,6 @@ import {
   UPDATE_QUESTION_VOTES,
 } from '../actions';
 
-// https://blog.ricardofilipe.com/post/immutable-changes-in-js
-const addItem = (arr, value) => arr.concat(value);
-
 export function allQuestions(questionsState = {}, action) {
   console.log(action);
   const { payload } = action;
@@ -15,6 +12,7 @@ export function allQuestions(questionsState = {}, action) {
         ...questionsState[0] = payload
       }
     case UPDATE_QUESTION_VOTES :
+    console.log('UPDATE_QUESTION_VOTES getting called - 2nd');
       return {
         ...questionsState,
           [payload.qid]: {

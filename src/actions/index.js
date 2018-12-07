@@ -1,5 +1,4 @@
 import * as API from '../data/_DATA.js';
-import { isObjectEmpty } from '../utils/helper.js';
 
 // Set up constants - these are exported to reducers
 export const SET_USERS = 'SET_USERS';
@@ -81,17 +80,10 @@ export const saveQuestion = (question) => dispatch => (
   API
   ._saveQuestion(question)
   .then(savedQuestion => {
-    console.log(savedQuestion);
-    dispatch(updateReduxStore(savedQuestion, UPDATE_USER_QUESTIONS)),
+    dispatch(updateReduxStore(savedQuestion, UPDATE_USER_QUESTIONS))
     dispatch(updateReduxStore(savedQuestion, UPDATE_LOGGEDIN_USER_QUESTIONS))
   })
 );
-// /*
-//   * Also update the Redux store
-// */
-// export const saveQuestionToUser = (vote) => dispatch => (
-//   dispatch(updateReduxStore(vote, UPDATE_USER_QUESTIONS))
-// );
 
 /*
   * Vote in poll
@@ -109,16 +101,10 @@ export const saveVoteInStore = (vote) => dispatch => (
   dispatch(updateReduxStore(vote, UPDATE_QUESTION_VOTES))
 );
 
-// export const getPostAndCommentsById = (id) => dispatch => (
-//   API
-//   .getPostById(id)
-//   .then(post => {
-//     API
-//     .getCommentsById(id)
-//     .then(comments => {
-//       const keyedComments = arrayToObject(comments, 'id');
-//       post['comments'] = keyedComments;
-//       dispatch(updateReduxStore(post, GET_POST_AND_COMMENTS_BY_ID))
-//     })
-//   })
-// );
+export const signOut = () => dispatch => (
+  dispatch(updateReduxStore({}, ADD_CURRENT_USER)),
+  dispatch(updateReduxStore({}, SET_ALL_QUESTIONS)),
+  dispatch(updateReduxStore({}, SET_ANSWERED_QUESTIONS)),
+  dispatch(updateReduxStore({}, SET_UNANSWERED_QUESTIONS)),
+  dispatch(updateReduxStore(null, SET_CURRENT_POLL_ID))
+);

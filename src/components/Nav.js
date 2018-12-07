@@ -7,11 +7,6 @@ import {
 } from '../actions';
 
 class Nav extends Component {
-
-  constructor (props) {
-    super(props);
-  }
-
   /*
     * Cater for user interacting with nav whilst on poll page
     * Avoids a flash of previous current poll when a new poll is eventually selected

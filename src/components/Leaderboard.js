@@ -16,7 +16,7 @@ class Leaderboard extends Component {
           Leaderboard
         </h1>
         {!isArrayEmpty(usersArray) && usersArray.map((user, index) => (
-          <div key={index} class={index}>
+          <div key={index} className={index}>
             {index === 0 &&
               <div className='leaderboard__logo-holder'>
                 <img src={ChampionLogo} className='leaderboard__logo' alt='1st place logo'/>

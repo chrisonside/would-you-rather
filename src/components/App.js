@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { isObjectEmpty } from '../utils/helper';
-import '../styles/app.css';
+import '../styles/app.scss';
 
 import Home from './Home';
 import UserDetails from './UserDetails';
 import Nav from './Nav';
 import SignIn from './SignIn';
+import SignOut from './SignOut';
 import NotFound from './NotFound';
 import AddPoll from './AddPoll';
 import Leaderboard from './Leaderboard';
@@ -28,6 +29,7 @@ class App extends Component {
 
         {!isObjectEmpty(loggedInUser) &&
           <div>
+            <SignOut></SignOut>
             <UserDetails></UserDetails>
             <Switch>
               <Route exact path='/' component={Home}/>

@@ -7,11 +7,6 @@ import {
 } from '../actions';
 
 class NotFound extends Component {
-
-  constructor (props) {
-    super(props);
-  }
-
   clearSelectedPoll() {
     this.props.clearCurrentPoll();
   }

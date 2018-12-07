@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import TickSymbol from 'react-icons/lib/fa/check';
-import '../styles/app.css';
+
+import '../styles/app.scss';
+
 import {
   saveQuestion,
 } from '../actions';

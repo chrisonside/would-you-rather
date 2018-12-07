@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { isObjectEmpty } from '../utils/helper';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
+
+import { isObjectEmpty } from '../utils/helper';
 
 import {
   clearCurrentPoll,

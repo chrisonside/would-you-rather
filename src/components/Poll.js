@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { isObjectEmpty } from '../utils/helper';
 import { Link, Redirect } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
+
+import { isObjectEmpty } from '../utils/helper';
 
 import {
   setCurrentPollId,
@@ -44,7 +45,7 @@ class Poll extends Component {
   }
 
   render() {
-    const { loggedInUser, isLoading, userAnsweredPoll, poll, pageNotFound, } = this.props;
+    const { isLoading, userAnsweredPoll, poll, pageNotFound, } = this.props;
 
     if(pageNotFound) {
       return <Redirect to='/page-not-found' />;

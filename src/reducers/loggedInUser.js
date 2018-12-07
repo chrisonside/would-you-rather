@@ -13,6 +13,7 @@ export function loggedInUser(loggedInUser = {}, action) {
         ...loggedInUser[0] = payload
       }
     case UPDATE_LOGGEDIN_USER_ANSWERS :
+    console.log('UPDATE_LOGGEDIN_USER_ANSWERS getting called - 1st');
       return {
         ...loggedInUser,
           answers: {
