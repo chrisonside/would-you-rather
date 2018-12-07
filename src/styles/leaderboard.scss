@@ -1,0 +1,25 @@
+.leaderboard {
+  position: relative;
+}
+
+.leaderboard__logo-holder {
+  position: absolute;
+  right: 0;
+  padding-top: 8px;
+  width: 65px;
+  height: 65px;
+  background-color: lime;
+  border-radius: 50%;
+}
+
+.leaderboard__logo-holder:before {
+  content: '1st';
+  position: absolute;
+  right: 70px;
+  color: lime;
+}
+
+.leaderboard__logo {
+  width: 45px;
+  height: 45px;
+}

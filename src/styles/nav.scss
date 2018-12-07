@@ -1,0 +1,16 @@
+@import './colors.scss';
+
+.nav {
+  text-align: right;
+  background-color: $color-navy;
+}
+
+.nav__link {
+  margin: 0 10px;
+  text-decoration: none;
+  color: $color-cream;
+}
+
+.nav__link--active {
+  color: $color-lightblue;
+}
