@@ -9,8 +9,8 @@ class UserDetails extends Component {
   render() {
     const { loggedInUser } = this.props;
     return (
-      <div>
-        <h3 className='loggedIn__name'>Hi there, {loggedInUser.name}</h3>
+      <div className='userdetails'>
+        <h3 className='userdetails__name'>Hi {loggedInUser.name}</h3>
       </div>
     );
   }

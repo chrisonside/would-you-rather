@@ -1,27 +1,47 @@
+.signin {
+  max-width: 410px;
+  margin: 30px auto;
+  padding: 10px 0;
+  background-color: $color-black;
+  border-radius: 5px;
+}
+
+.signin__label {
+  font-size: 21px;
+  line-height: 26px;
+  color: $color-cream;
+  font-weight: 400;
+}
+
 .signin__user {
   max-width: 350px;
-  margin: 0 auto 10px;
+  margin: 0 auto 30px;
   padding: 10px;
   cursor: pointer;
-}
-
-.signin__user:nth-child(even) {
-  background-color: skyblue;
-}
-
-.signin__user:nth-child(odd) {
-  background-color: silver;
+  background-color: $color-cream;
+  border-radius: 5px;
 }
 
 .signin__user {
   position: relative;
   display: flex;
   align-items: center;
+  transition: background-color $transition;
+
+  &:hover {
+    background-color: $color-teal;
+    .signin__name {
+      color: $color-cream;
+    }
+  }
 }
 
 .signin__name {
   width: 50%;
   padding: 0 10px;
+  font-size: 17px;
+  line-height: 20px;
+  transition: color $transition;
 }
 
 .signin__avatar-placeholder {

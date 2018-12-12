@@ -1,0 +1,47 @@
+.poll-list {
+  background-color: $color-white;
+  padding: $padding;
+  margin-bottom: $vertical-rhythm;
+  border-radius: $border-radius;
+}
+
+.poll-list__toggle {
+  display: inline-block;
+  padding: 20px 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.poll-list--true .poll-list__toggle--answered {
+  background: $color-teal;
+}
+
+.poll-list--false .poll-list__toggle--notanswered {
+  background: $color-teal;
+}
+
+.poll-list__question {
+  padding: $padding;
+  margin-bottom: $vertical-rhythm;
+  border-radius: $border-radius;
+  background-color: $color-grey;
+}
+
+.poll-list__question-title {
+  margin-bottom: $vertical-rhythm / 2;
+}
+
+.poll-list__link {
+  display: inline-block;
+  padding: $padding / 2;
+  border-radius: $border-radius;
+  color: $color-black;
+  background-color: $color-white;
+  transition: all $transition;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $color-teal;
+    color: $color-white;
+  }
+}

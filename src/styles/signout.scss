@@ -1,0 +1,19 @@
+.signout__click {
+  display: inline-block;
+  margin: 0 $padding;
+  border: none;
+  border-radius: $border-radius;
+  padding: 5px 8px 6px;
+  font-size: 14px;
+  line-height: 14px;
+  cursor: pointer;
+  color: $color-black;
+  background-color: $color-white;
+  transition: all $transition;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $color-teal;
+    color: $color-white;
+  }
+}

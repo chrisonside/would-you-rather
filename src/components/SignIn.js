@@ -34,7 +34,7 @@ class SignIn extends Component {
       <div>
         {!isArrayEmpty(usersArray) && (
          <div className='signin'>
-          <p className='signin__label'>Hi there! Please log in:</p>
+          <p className='signin__label'>Hi! Please log in:</p>
           <div className='signin__users'>
             {usersArray.map((user, index) => (
               <div key={ `${user.name}-${index}`} className='signin__user'>

@@ -57,10 +57,10 @@ class PollList extends Component {
     const answersToDisplay = showAnswered ? answered : notAnswered;
 
     return (
-      <div className={`pollist pollist--${showAnswered}`}>
+      <div className={`poll-list poll-list--${showAnswered}`}>
 
-        <div className='polllist__toggle polllist__toggle--answered' onClick={() => this.displayAnswered(true)}>Answered</div>
-        <div className='polllist__toggle polllist__toggle--notanswered' onClick={() => this.displayAnswered(false)}>Not answered</div>
+        <div className='poll-list__toggle poll-list__toggle--answered' onClick={() => this.displayAnswered(true)}>Answered</div>
+        <div className='poll-list__toggle poll-list__toggle--notanswered' onClick={() => this.displayAnswered(false)}>Not answered</div>
 
         {isArrayEmpty(answersToDisplay) &&
           <Loader
@@ -73,14 +73,14 @@ class PollList extends Component {
 
         {!isArrayEmpty(answersToDisplay) && (
           <div>
-            <div className='pollist__questions'>
-              <h2 className='pollist__title'>Would you rather...</h2>
+            <div className='poll-list__questions'>
+              <h2 className='poll-list__title'>Would you rather...</h2>
               {answersToDisplay.map((question, index) => (
-                <div key={ `${question.name}-${index}`} className='pollist__question'>
-                  <p className='pollist__question-title'>
+                <div key={ `${question.name}-${index}`} className='poll-list__question'>
+                  <h3 className='poll-list__question-title'>
                     {question.optionOne.text} or {question.optionTwo.text}
-                  </p>
-                  <Link to={`/${question.id}`} className='pollist__link'>
+                  </h3>
+                  <Link to={`/${question.id}`} className='poll-list__link'>
                       See poll details
                   </Link>
                 </div>

@@ -21,26 +21,34 @@ class App extends Component {
     const { loggedInUser } = this.props;
 
     return (
-      <div className="App">
+      <div className="app">
 
-        <Nav></Nav>
+        <div className="app__wrapper">
 
-        {isObjectEmpty(loggedInUser) && <SignIn></SignIn>}
+          {!isObjectEmpty(loggedInUser) &&
+            <div className='user-admin'>
+              <UserDetails></UserDetails>
+              <SignOut></SignOut>
+            </div>
+          }
 
-        {!isObjectEmpty(loggedInUser) &&
-          <div>
-            <SignOut></SignOut>
-            <UserDetails></UserDetails>
-            <Switch>
-              <Route exact path='/' component={Home}/>
-              <Route exact path='/add' component={AddPoll}/>
-              <Route exact path='/page-not-found' component={NotFound}/>
-              <Route exact path='/leaderboard' component={Leaderboard}/>
-              <Route exact path='/:id' component={Poll}/>
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </div>
-        }
+          {isObjectEmpty(loggedInUser) && <SignIn></SignIn>}
+
+          {!isObjectEmpty(loggedInUser) &&
+            <div>
+              <Nav></Nav>
+              <Switch>
+                <Route exact path='/' component={Home}/>
+                <Route exact path='/add' component={AddPoll}/>
+                <Route exact path='/page-not-found' component={NotFound}/>
+                <Route exact path='/leaderboard' component={Leaderboard}/>
+                <Route exact path='/:id' component={Poll}/>
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </div>
+          }
+
+        </div>
 
       </div>
 
