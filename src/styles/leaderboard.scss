@@ -1,5 +1,6 @@
 .leaderboard {
   position: relative;
+  background-color: $color-white;
 }
 
 .leaderboard__logo-holder {
@@ -8,7 +9,7 @@
   padding-top: 8px;
   width: 65px;
   height: 65px;
-  background-color: lime;
+  background-color: $color-teal;
   border-radius: 50%;
 }
 
@@ -16,7 +17,7 @@
   content: '1st';
   position: absolute;
   right: 70px;
-  color: lime;
+  color: $color-teal;
 }
 
 .leaderboard__logo {

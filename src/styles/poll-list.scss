@@ -10,14 +10,13 @@
   padding: 20px 10px;
   background: transparent;
   cursor: pointer;
+  color: $color-black;
 }
 
-.poll-list--true .poll-list__toggle--answered {
-  background: $color-teal;
-}
-
+.poll-list--true .poll-list__toggle--answered,
 .poll-list--false .poll-list__toggle--notanswered {
   background: $color-teal;
+  color: $color-white;
 }
 
 .poll-list__question {

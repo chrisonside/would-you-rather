@@ -9,7 +9,7 @@
 .signin__label {
   font-size: 21px;
   line-height: 26px;
-  color: $color-cream;
+  color: $color-white;
   font-weight: 400;
 }
 
@@ -18,7 +18,7 @@
   margin: 0 auto 30px;
   padding: 10px;
   cursor: pointer;
-  background-color: $color-cream;
+  background-color: $color-white;
   border-radius: 5px;
 }
 
@@ -31,7 +31,7 @@
   &:hover {
     background-color: $color-teal;
     .signin__name {
-      color: $color-cream;
+      color: $color-white;
     }
   }
 }

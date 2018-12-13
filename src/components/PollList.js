@@ -65,7 +65,7 @@ class PollList extends Component {
         {isArrayEmpty(answersToDisplay) &&
           <Loader
             type="Puff"
-            color="#00BFFF"
+            color="#00ADB5"
             height="100"
             width="100"
           />

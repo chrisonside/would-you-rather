@@ -64,23 +64,25 @@ class Poll extends Component {
 
         {!isLoading &&
           <div>
-            <p>Asked by:</p>
+            <h2 className='poll__sub-title'>Asked by:</h2>
             <img className='poll__avatar' src={poll.authorAvatar} alt={poll.authorName} />
-            <p>Would you rather</p>
-            {poll.options.map((option, i) => (
-              <div key={i} className={`poll__option ${option.className}`}>
-                <p className='poll__text'>{option.text}</p>
-                {!userAnsweredPoll &&
-                  <button className='poll__vote' onClick={() => this.voteInPoll(option.optionName)}>{`Vote for ${option.optionName}!`}</button>
-                }
-                {userAnsweredPoll &&
-                  <div>
-                    <p className='poll__count'>{option.voteCount} other people agreed!</p>
-                    <p className='poll__percentage'>That's {option.votePercentage}% of people surveyed.</p>
-                  </div>
-                }
-              </div>
-            ))}
+            <h1 className='poll__title'>Would you rather:</h1>
+            <div className='poll__options'>
+              {poll.options.map((option, i) => (
+                <div key={i} className={`poll__option ${option.className}`}>
+                  <p className='poll__text'>{option.text}</p>
+                  {!userAnsweredPoll &&
+                    <button className='poll__vote' onClick={() => this.voteInPoll(option.optionName)}>{`Vote for ${option.optionName}!`}</button>
+                  }
+                  {userAnsweredPoll &&
+                    <div>
+                      <p className='poll__count'>{option.voteCount} other people agreed with you</p>
+                      <p className='poll__percentage'>That's {option.votePercentage}% of people surveyed.</p>
+                    </div>
+                  }
+                </div>
+              ))}
+            </div>
             <Link to='/' className='poll__link' onClick={() => this.clearSelectedPoll()}>Back to polls</Link>
           </div>
         }
