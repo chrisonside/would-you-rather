@@ -67,7 +67,7 @@ class AddPoll extends Component {
         {(!submitSucceeded) && (
            <form className="form" onSubmit={handleSubmit(this.handleFormValues)}>
             <h1 className="form__title">Add a new poll</h1>
-            <h1 className="form__sub-title">Would you rather</h1>
+            <h2 className="form__sub-title">Would you rather:</h2>
             <div className="form__field">
               <Field name="optionOne" component={renderField} type="text" label="Option one"/>
             </div>
