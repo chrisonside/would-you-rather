@@ -1,6 +1,14 @@
 .poll {
   background-color: $color-white;
   padding: $padding;
+  &--false {
+    .poll__option {
+      background-color: $color-cream;
+    }
+    .poll__option:nth-child(even) {
+      background-color: $color-grey;
+    }
+  }
 }
 
 .poll__title {
@@ -20,6 +28,9 @@
   font-size: 19px;
   line-height: 22px;
   font-weight: 400;
+  &:first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .poll__avatar {
@@ -29,26 +40,57 @@
 }
 
 .poll__options {
+  position: relative;
   margin-bottom: $vertical-rhythm * 2;
 }
 
-.poll__option--selected {
+.poll__option {
   padding: $padding;
+  border-radius: $border-radius;
+  transition: background-color $transition;
+}
+
+.poll__option--selected {
   background: $color-teal;
   color: $color-white;
+}
+
+.poll__count {
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 .poll__link {
   display: inline-block;
   padding: $padding / 2;
   border-radius: $border-radius;
-  background-color: $color-teal;
+  background-color: $color-black;
   color: $color-white;
   transition: all $transition;
   text-decoration: none;
 
   &:hover {
-    color: $color-black;
-    background-color: $color-grey;
+    background-color: $color-teal;
+    color: $color-white;
+  }
+}
+
+.poll__vote {
+  display: inline-block;
+  margin: 0 $padding;
+  border: none;
+  border-radius: $border-radius;
+  padding: 5px 8px 6px;
+  font-size: 14px;
+  line-height: 14px;
+  cursor: pointer;
+  color: $color-white;
+  background-color: $color-teal;
+  transition: all $transition;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $color-black;
+    color: $color-white;
   }
 }

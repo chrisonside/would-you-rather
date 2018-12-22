@@ -7,10 +7,16 @@
 
 .poll-list__toggle {
   display: inline-block;
-  padding: 20px 10px;
+  padding: $padding $padding/2;
   background: transparent;
   cursor: pointer;
   color: $color-black;
+  transition: all $transition;
+
+  &:hover {
+    background-color: $color-grey;
+    color: $color-black;
+  }
 }
 
 .poll-list--true .poll-list__toggle--answered,
@@ -34,8 +40,8 @@
   display: inline-block;
   padding: $padding / 2;
   border-radius: $border-radius;
-  color: $color-black;
-  background-color: $color-white;
+  color: $color-white;
+  background-color: $color-black;
   transition: all $transition;
   text-decoration: none;
 
@@ -43,4 +49,8 @@
     background-color: $color-teal;
     color: $color-white;
   }
+}
+
+.poll-list__spinner-spacer {
+  padding-top: $padding*4;
 }

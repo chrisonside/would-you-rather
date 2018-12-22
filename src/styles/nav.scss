@@ -9,16 +9,15 @@
 .nav__link {
   margin: 0 10px;
   text-decoration: none;
+  font-weight: 400;
   color: $color-white;
   transition: all $transition;
 
   &:hover {
-    color: $color-black;
+    color: $color-yellow;
   }
 }
 
 .nav__link--active {
   color: $color-black;
-  text-decoration: none;
-  border-bottom: 2px solid $color-black
 }

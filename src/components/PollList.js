@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
+
+import Spinner from './Spinner';
 
 import { isObjectEmpty } from '../utils/helper';
 
@@ -63,12 +64,7 @@ class PollList extends Component {
         <div className='poll-list__toggle poll-list__toggle--notanswered' onClick={() => this.displayAnswered(false)}>Not answered</div>
 
         {isArrayEmpty(answersToDisplay) &&
-          <Loader
-            type="Puff"
-            color="#00ADB5"
-            height="100"
-            width="100"
-          />
+          <Spinner />
         }
 
         {!isArrayEmpty(answersToDisplay) && (

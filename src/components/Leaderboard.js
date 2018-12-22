@@ -12,21 +12,23 @@ class Leaderboard extends Component {
 
     return (
       <div className='leaderboard'>
-        <h1>
+        <h1 className='leaderboard__title'>
           Leaderboard
         </h1>
         {!isArrayEmpty(usersArray) && usersArray.map((user, index) => (
-          <div key={index} className={index}>
+          <div key={index} className={`leaderboard__entry leaderboard__entry--${index}`}>
             {index === 0 &&
               <div className='leaderboard__logo-holder'>
                 <img src={ChampionLogo} className='leaderboard__logo' alt='1st place logo'/>
               </div>
             }
-            <p className='leaderboard__name'>{user.name}</p>
+            <p className='leaderboard__name'>#{index + 1} {user.name}</p>
             <img className='leaderboard__avatar' src={user.avatarURL} alt={user.name} />
-            <p className='leaderboard__answers'>Questions answered: {user.answers}</p>
-            <p className='leaderboard__questions'>Questions asked: {user.questions}</p>
-            <p className='leaderboard__score'>Total score: {user.score}</p>
+            <div className='leaderboard__stats'>
+              <p className='leaderboard__answers'>Questions answered: <span className='leaderboard__figure'>{user.answers}</span></p>
+              <p className='leaderboard__questions'>Questions asked: <span className='leaderboard__figure'>{user.questions}</span></p>
+              <p className='leaderboard__score'>Total score: <span className='leaderboard__figure'>{user.score}</span></p>
+            </div>
           </div>
         ))}
       </div>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
+
+import Spinner from './Spinner';
 
 import { isObjectEmpty } from '../utils/helper';
 
@@ -52,14 +53,9 @@ class Poll extends Component {
     }
 
     return (
-      <div className='poll'>
+      <div className={`poll poll--${userAnsweredPoll}`}>
         {isLoading &&
-          <Loader
-            type="Puff"
-            color="#00BFFF"
-            height="100"
-            width="100"
-          />
+          <Spinner />
         }
 
         {!isLoading &&
@@ -76,8 +72,7 @@ class Poll extends Component {
                   }
                   {userAnsweredPoll &&
                     <div>
-                      <p className='poll__count'>{option.voteCount} other people agreed with you</p>
-                      <p className='poll__percentage'>That's {option.votePercentage}% of people surveyed.</p>
+                      <p className='poll__count'>{option.voteCount} people agreed with you, that's {option.votePercentage}% of people surveyed.</p>
                     </div>
                   }
                 </div>

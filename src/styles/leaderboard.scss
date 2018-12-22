@@ -3,24 +3,88 @@
   background-color: $color-white;
 }
 
-.leaderboard__logo-holder {
-  position: absolute;
-  right: 0;
-  padding-top: 8px;
-  width: 65px;
-  height: 65px;
-  background-color: $color-teal;
-  border-radius: 50%;
+.leaderboard__title {
+  margin: 0;
+  padding: $padding $padding 0;
+  background: $color-white;
+  color: $color-black;
 }
 
-.leaderboard__logo-holder:before {
-  content: '1st';
-  position: absolute;
-  right: 70px;
-  color: $color-teal;
+.leaderboard__entry {
+  padding: $padding;
+  background-color: $color-white;
+}
+
+.leaderboard__entry--0 {
+  .leaderboard__avatar {
+    border: 20px solid $color-yellow;
+  }
+  .leaderboard__figure {
+    color: $color-yellow;
+  }
+}
+
+.leaderboard__logo-holder {
+  display: inline-block;
+  position: relative;
+  border: 8px solid $color-yellow;
+  width: 80px;
+  height: 80px;
+  background-color: $color-teal;
+  border-radius: 50%;
+  margin-bottom: $vertical-rhythm * 2;
 }
 
 .leaderboard__logo {
-  width: 45px;
-  height: 45px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50%;
+  margin-left: -20px;
+  width: 40px;
+  height: 40px;
+}
+
+.leaderboard__name {
+  font-size: 30px;
+  line-height: 32px;
+  font-weight: 700;
+  margin-bottom: $vertical-rhythm;
+}
+
+.leaderboard__avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: $vertical-rhythm;
+}
+
+.leaderboard__stats {
+  padding: $padding;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: $border-radius;
+  background-color: $color-black;
+  color: $color-white;
+}
+
+.leaderboard__answers {
+  font-size: 20px;
+  line-height: 21px;
+  font-weight: 700;
+  margin-bottom: $vertical-rhythm;
+}
+
+.leaderboard__questions {
+  font-size: 20px;
+  line-height: 21px;
+  font-weight: 700;
+  margin-bottom: $vertical-rhythm;
+}
+
+.leaderboard__score {
+  font-size: 20px;
+  line-height: 21px;
+  font-weight: 700;
+  margin-bottom: $vertical-rhythm;
 }

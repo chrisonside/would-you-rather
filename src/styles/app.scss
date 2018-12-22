@@ -1,11 +1,15 @@
 @import 'variables.scss';
 @import 'colors.scss';
 @import 'general.scss';
+
+/* Components */
+@import 'add-poll.scss';
 @import 'leaderboard.scss';
 @import 'nav.scss';
+@import 'not-found.scss';
 @import 'poll.scss';
 @import 'poll-list.scss';
-@import 'userdetails.scss';
 @import 'signin.scss';
 @import 'signout.scss';
+@import 'userdetails.scss';
 @import 'user-admin.scss';
