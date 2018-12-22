@@ -1,0 +1,35 @@
+.not-found {
+  padding: $padding;
+  background-color: $color-white;
+}
+
+.not-found__title {
+  margin: 0 0 $vertical-rhythm;
+  padding: $padding $padding 0;
+  background: $color-white;
+  color: $color-black;
+}
+
+.not-found__logo {
+  width: 200px;
+}
+
+.not-found__link {
+  display: inline-block;
+  margin: 0 $padding;
+  border: none;
+  border-radius: $border-radius;
+  padding: 7px 10px 8px;
+  font-size: 16px;
+  line-height: 16px;
+  cursor: pointer;
+  color: $color-white;
+  background-color: $color-teal;
+  transition: all $transition;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $color-black;
+    color: $color-white;
+  }
+}
