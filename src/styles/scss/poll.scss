@@ -1,6 +1,11 @@
+@import 'variables.scss';
+@import 'colors.scss';
+
 .poll {
   background-color: $color-white;
   padding: $padding;
+  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
   &--false {
     .poll__option {
       background-color: $color-cream;

@@ -1,0 +1,16 @@
+.signout__click {
+  display: inline-block;
+  margin: 0 20px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 8px 6px;
+  font-size: 14px;
+  line-height: 14px;
+  cursor: pointer;
+  color: #393E46;
+  background-color: #fff;
+  transition: all 0.1s ease-in;
+  text-decoration: none; }
+  .signout__click:hover {
+    background-color: #00ADB5;
+    color: #fff; }

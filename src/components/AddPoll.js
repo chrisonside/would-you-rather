@@ -3,8 +3,6 @@ import { Field, reduxForm } from 'redux-form';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import '../styles/app.scss';
-
 import {
   saveQuestion,
 } from '../actions';

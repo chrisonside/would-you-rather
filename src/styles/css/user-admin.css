@@ -2,9 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $color-black;
-
+  background-color: #393E46; }
   @media only screen and (min-width: 600px) {
-    justify-content: flex-end;
-  }
-}
+    .user-admin {
+      justify-content: flex-end; } }

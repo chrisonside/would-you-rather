@@ -13,19 +13,25 @@ I've added some simple styling to the app using SASS. I also use a few images/ic
 
 # To get the project up and running
 
-`npm install`
-`npm start`
+* `git clone git@github.com:chrisonside/would-you-rather.git`
+* `cd would-you-rather`
+* `npm install`
+* `npm start`
 
 # Overview of other dependencies (aside from React and Redux)
 
 [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner)
+
 The React Loader Spinner is used as a visual cue to the user that data will soon be loaded into the view.
 
 [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+
 React Router DOM is used as the DOM bindings for React Router - React Router is a commonly used routing library for React and makes sure that my app's UI is in sync with the current URL.
 
 [redux-form](https://www.npmjs.com/package/redux-form)
+
 I am using Redux Form (which works well with the React-Redux bindings) to manage my form state in Redux.
 
 [redux-thunk](https://www.npmjs.com/package/redux-thunk)
+
 Redux Thunk middleware is used to release Redux from its synchronous confines, allowing my app to dispatch actions once it has heard back from an API.

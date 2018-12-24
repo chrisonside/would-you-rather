@@ -1,0 +1,56 @@
+.signin {
+  max-width: 410px;
+  margin: 30px auto;
+  padding: 10px 0;
+  background-color: #393E46;
+  border-radius: 5px; }
+
+.signin__label {
+  font-size: 21px;
+  line-height: 26px;
+  color: #fff;
+  font-weight: 400; }
+
+.signin__user {
+  max-width: 350px;
+  margin: 0 auto 30px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 5px; }
+
+.signin__user {
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.1s ease-in; }
+  .signin__user:hover {
+    background-color: #00ADB5; }
+    .signin__user:hover .signin__name {
+      color: #fff; }
+
+.signin__name {
+  width: 50%;
+  padding: 0 10px;
+  font-size: 17px;
+  line-height: 20px;
+  transition: color 0.1s ease-in; }
+
+.signin__avatar-placeholder {
+  width: 50%; }
+
+.signin__avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: relative;
+  top: 3px; }
+
+/* Handle all clicks on user login div */
+.signin__click {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; }

@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 
 import App from './components/App';
 import masterReducer from './reducers/masterReducer';
+import './styles/css/index.css';
 // import registerServiceWorker from './serviceWorkers/registerServiceWorker';
 
 // Combine middleware and redux dev tools

@@ -1,0 +1,8 @@
+.userdetails {
+  display: inline-block; }
+
+.userdetails__name {
+  font-size: 15px;
+  line-height: 15px;
+  color: #fff;
+  font-weight: 400; }

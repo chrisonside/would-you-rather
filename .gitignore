@@ -19,3 +19,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# https://hackernoon.com/using-sass-with-create-react-app-without-ejecting-b5f4f827ed9e
+.sass-cache

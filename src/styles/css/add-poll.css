@@ -1,0 +1,78 @@
+.form {
+  background-color: #fff;
+  padding: 20px; }
+
+.form__sub-title {
+  margin-bottom: 40px; }
+
+.form__field {
+  margin-bottom: 40px; }
+
+.form__entry {
+  position: relative; }
+
+.form__label {
+  display: block;
+  margin: 0 0 5px;
+  font-size: 18px;
+  line-height: 22px;
+  color: #393E46; }
+
+.form__inputs {
+  position: relative; }
+
+.form__input-box {
+  padding: 10px;
+  background-color: #fff;
+  border: 2px solid #393E46;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #393E46;
+  /* https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete#answer-14205976 */ }
+  .form__input-box:-webkit-autofill, .form__input-box:-webkit-autofill:hover, .form__input-box:-webkit-autofill:focus, .form__input-box:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 25px #fff inset; }
+
+.form__error {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FC3C3C; }
+
+.form__submit {
+  border: 2px solid #00ADB5;
+  background-color: #00ADB5;
+  margin-right: 20px;
+  padding: 10px 20px;
+  font-size: 19px;
+  line-height: 19px;
+  color: #fff;
+  text-decoration: none;
+  opacity: 1;
+  transition: all 0.1s ease-in; }
+  .form__submit:disabled {
+    border: 2px solid #F8B500;
+    background-color: #F8B500;
+    opacity: 0.5; }
+  .form__submit:hover {
+    cursor: pointer;
+    border: 2px solid #393E46;
+    background-color: #393E46; }
+
+.form__clear {
+  border: 2px solid #efefef;
+  background-color: #efefef;
+  margin-right: 0;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 19px;
+  line-height: 19px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.1s ease-in; }
+  .form__clear:hover {
+    background-color: #fff;
+    color: #efefef;
+    cursor: pointer; }

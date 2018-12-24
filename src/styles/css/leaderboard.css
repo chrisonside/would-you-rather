@@ -1,39 +1,32 @@
 .leaderboard {
   position: relative;
-  background-color: $color-white;
-}
+  background-color: #fff; }
 
 .leaderboard__title {
   margin: 0;
-  padding: $padding $padding 0;
-  background: $color-white;
-  color: $color-black;
-}
+  padding: 20px 20px 0;
+  background: #fff;
+  color: #393E46; }
 
 .leaderboard__entry {
-  padding: $padding;
-  background-color: $color-white;
-}
+  padding: 20px;
+  background-color: #fff; }
 
-.leaderboard__entry--0 {
-  .leaderboard__avatar {
-    border: 20px solid $color-yellow;
-  }
-  .leaderboard__figure {
-    color: $color-yellow;
-  }
-}
+.leaderboard__entry--0 .leaderboard__avatar {
+  border: 20px solid #F8B500; }
+
+.leaderboard__entry--0 .leaderboard__figure {
+  color: #F8B500; }
 
 .leaderboard__logo-holder {
   display: inline-block;
   position: relative;
-  border: 8px solid $color-yellow;
+  border: 8px solid #F8B500;
   width: 80px;
   height: 80px;
-  background-color: $color-teal;
+  background-color: #00ADB5;
   border-radius: 50%;
-  margin-bottom: $vertical-rhythm * 2;
-}
+  margin-bottom: 40px; }
 
 .leaderboard__logo {
   position: absolute;
@@ -42,49 +35,42 @@
   left: 50%;
   margin-left: -20px;
   width: 40px;
-  height: 40px;
-}
+  height: 40px; }
 
 .leaderboard__name {
   font-size: 30px;
   line-height: 32px;
   font-weight: 700;
-  margin-bottom: $vertical-rhythm;
-}
+  margin-bottom: 20px; }
 
 .leaderboard__avatar {
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  margin-bottom: $vertical-rhythm;
-}
+  margin-bottom: 20px; }
 
 .leaderboard__stats {
-  padding: $padding;
+  padding: 20px;
   max-width: 400px;
   margin: 0 auto;
-  border-radius: $border-radius;
-  background-color: $color-black;
-  color: $color-white;
-}
+  border-radius: 5px;
+  background-color: #393E46;
+  color: #fff; }
 
 .leaderboard__answers {
   font-size: 20px;
   line-height: 21px;
   font-weight: 700;
-  margin-bottom: $vertical-rhythm;
-}
+  margin-bottom: 20px; }
 
 .leaderboard__questions {
   font-size: 20px;
   line-height: 21px;
   font-weight: 700;
-  margin-bottom: $vertical-rhythm;
-}
+  margin-bottom: 20px; }
 
 .leaderboard__score {
   font-size: 20px;
   line-height: 21px;
   font-weight: 700;
-  margin-bottom: $vertical-rhythm;
-}
+  margin-bottom: 20px; }

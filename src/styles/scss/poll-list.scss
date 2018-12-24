@@ -1,8 +1,12 @@
+@import 'variables.scss';
+@import 'colors.scss';
+
 .poll-list {
   background-color: $color-white;
   padding: $padding;
   margin-bottom: $vertical-rhythm;
-  border-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
 }
 
 .poll-list__toggle {

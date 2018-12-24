@@ -1,0 +1,29 @@
+.not-found {
+  padding: 20px;
+  background-color: #fff; }
+
+.not-found__title {
+  margin: 0 0 20px;
+  padding: 20px 20px 0;
+  background: #fff;
+  color: #393E46; }
+
+.not-found__logo {
+  width: 200px; }
+
+.not-found__link {
+  display: inline-block;
+  margin: 0 20px;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 10px 8px;
+  font-size: 16px;
+  line-height: 16px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #00ADB5;
+  transition: all 0.1s ease-in;
+  text-decoration: none; }
+  .not-found__link:hover {
+    background-color: #393E46;
+    color: #fff; }

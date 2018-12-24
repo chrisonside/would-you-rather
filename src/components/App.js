@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { isObjectEmpty } from '../utils/helper';
-import '../styles/app.scss';
 
 import PollList from './PollList';
 import UserDetails from './UserDetails';

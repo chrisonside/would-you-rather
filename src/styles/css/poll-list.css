@@ -1,0 +1,46 @@
+.poll-list {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px; }
+
+.poll-list__toggle {
+  display: inline-block;
+  padding: 20px 10px;
+  background: transparent;
+  cursor: pointer;
+  color: #393E46;
+  transition: all 0.1s ease-in; }
+  .poll-list__toggle:hover {
+    background-color: #efefef;
+    color: #393E46; }
+
+.poll-list--true .poll-list__toggle--answered,
+.poll-list--false .poll-list__toggle--notanswered {
+  background: #00ADB5;
+  color: #fff; }
+
+.poll-list__question {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #efefef; }
+
+.poll-list__question-title {
+  margin-bottom: 10px; }
+
+.poll-list__link {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #393E46;
+  transition: all 0.1s ease-in;
+  text-decoration: none; }
+  .poll-list__link:hover {
+    background-color: #00ADB5;
+    color: #fff; }
+
+.poll-list__spinner-spacer {
+  padding-top: 80px; }
