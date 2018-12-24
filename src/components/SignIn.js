@@ -15,8 +15,7 @@ class SignIn extends Component {
     this.handleUserSelection = this.handleUserSelection.bind(this);
   }
 
-  // Populate users data in Redux Store.
-  // I'm subscribed to users, so this store update will trigger a rerender of this Component
+  // Populate users data in Redux Store, triggering a rerender of this Component
   componentDidMount() {
     this.props.getUsers();
   }
@@ -53,9 +52,7 @@ class SignIn extends Component {
   }
 }
 
-// Format shape of store data for this component
 function mapStateToProps( {users} ) {
-
   /*  Convert users from Redux store's object format to an array, for easy looping over in UI */
   let usersArray = null;
   if(!isArrayEmpty(users)) {
@@ -73,7 +70,6 @@ function mapStateToProps( {users} ) {
 
 }
 
-// Bind dispatch to the action creators required for this component - in this case, to populate my Store with my users
 function mapDispatchToProps(dispatch) {
   return {
     getUsers: () => dispatch(getUsers()),

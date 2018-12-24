@@ -13,7 +13,6 @@ export const CLEAR_CURRENT_POLL = 'CLEAR_CURRENT_POLL';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const ADD_VOTE = 'ADD_VOTE';
 export const UPDATE_QUESTION_VOTES = 'UPDATE_QUESTION_VOTES';
-export const UPDATE_USER_QUESTIONS = 'UPDATE_USER_QUESTIONS';
 export const UPDATE_LOGGEDIN_USER_ANSWERS = 'UPDATE_LOGGEDIN_USER_ANSWERS';
 export const UPDATE_LOGGEDIN_USER_QUESTIONS = 'UPDATE_LOGGEDIN_USER_QUESTIONS';
 
@@ -80,7 +79,6 @@ export const saveQuestion = (question) => dispatch => (
   API
   ._saveQuestion(question)
   .then(savedQuestion => {
-    dispatch(updateReduxStore(savedQuestion, UPDATE_USER_QUESTIONS))
     dispatch(updateReduxStore(savedQuestion, UPDATE_LOGGEDIN_USER_QUESTIONS))
   })
 );
@@ -88,6 +86,7 @@ export const saveQuestion = (question) => dispatch => (
 /*
   * Vote in poll
   * As spoofing a database, adds vote to the app's javaScript memory
+  * If this was a real app, we'd save this vote to a real database
 */
 export const saveVoteToDb = (vote) => dispatch => (
   API

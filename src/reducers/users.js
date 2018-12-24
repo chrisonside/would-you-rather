@@ -1,12 +1,11 @@
 import {
   SET_USERS,
   UPDATE_LOGGEDIN_USER_ANSWERS,
-  UPDATE_USER_QUESTIONS
+  UPDATE_LOGGEDIN_USER_QUESTIONS
 } from '../actions';
 
 export function users(usersState = {}, action) {
   const { payload } = action;
-  console.log(payload);
   switch (action.type) {
     case SET_USERS :
       return {
@@ -23,7 +22,7 @@ export function users(usersState = {}, action) {
             }
           }
       }
-      case UPDATE_USER_QUESTIONS :
+      case UPDATE_LOGGEDIN_USER_QUESTIONS :
       return {
         ...usersState,
           [payload.author]: {

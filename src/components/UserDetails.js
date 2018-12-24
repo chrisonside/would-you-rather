@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  // logOut
-} from '../actions';
-
 class UserDetails extends Component {
   render() {
     const { loggedInUser } = this.props;
@@ -16,7 +12,6 @@ class UserDetails extends Component {
   }
 }
 
-// Format shape of store data for this component
 function mapStateToProps( {loggedInUser} ) {
   return {
     loggedInUser

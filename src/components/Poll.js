@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 import Spinner from './Spinner';
-
 import { isObjectEmpty } from '../utils/helper';
 
 import {
@@ -26,7 +25,6 @@ class Poll extends Component {
       qid: this.props.poll.id,
       answer: selection
     }
-    // console.log(this.props.loggedInUser.id, this.props.poll.id, selection);
     this.props.saveVoteToDb(vote);
     this.props.saveVoteInStore(vote);
   }

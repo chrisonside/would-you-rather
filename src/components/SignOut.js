@@ -13,7 +13,6 @@ class SignOut extends Component {
   }
 
   handleSignOut(e) {
-    console.log('clicked');
     this.props.signOut();
   }
 
@@ -24,7 +23,6 @@ class SignOut extends Component {
   }
 }
 
-// Bind dispatch to the action creators required for this component - in this case, to populate my Store with my users
 function mapDispatchToProps(dispatch) {
   return {
     signOut: () => dispatch(signOut()),

@@ -42,7 +42,6 @@ function convertToArray(object) {
 }
 
 function mapStateToProps( {users} ) {
-  // const sortedUsers = prepData(users);
   let usersArray = [];
   if(!isObjectEmpty(users)) {
     const usersObjClone = JSON.parse(JSON.stringify(users))

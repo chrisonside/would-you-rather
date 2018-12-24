@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Spinner from './Spinner';
-
 import { isObjectEmpty } from '../utils/helper';
 
 import {
@@ -24,13 +23,11 @@ class PollList extends Component {
   }
 
   componentDidMount() {
-    console.log('pollList being remounted');
     /*
       * Handle user clicking back button to poll list from poll.
       * Clearing selectedPoll now avoids flash of old post when user clicks on another poll in future
     */
     window.onpopstate = (e) => {
-      console.log('back button pressed');
       this.clearSelectedPoll();
     }
 
@@ -123,7 +120,6 @@ function mapStateToProps( {loggedInUser, answeredQuestions, unAnsweredQuestions}
 
 }
 
-// Bind dispatch to the action creators required for this component - in this case, to populate my Store with my users
 function mapDispatchToProps(dispatch) {
   return {
     collateUserAnswers: (user) => dispatch(collateUserAnswers(user)),

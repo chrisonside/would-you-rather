@@ -26,7 +26,6 @@ class Nav extends Component {
   }
 }
 
-// Bind dispatch to the action creators required for this component - in this case, to populate my Store with my users
 function mapDispatchToProps(dispatch) {
   return {
     clearCurrentPoll: () => dispatch(clearCurrentPoll()),

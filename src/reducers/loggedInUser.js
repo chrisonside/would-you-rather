@@ -6,14 +6,12 @@ import {
 
 export function loggedInUser(loggedInUser = {}, action) {
   const { payload } = action;
-  console.log(payload);
   switch (action.type) {
     case ADD_CURRENT_USER :
       return {
         ...loggedInUser[0] = payload
       }
     case UPDATE_LOGGEDIN_USER_ANSWERS :
-    console.log('UPDATE_LOGGEDIN_USER_ANSWERS getting called - 1st');
       return {
         ...loggedInUser,
           answers: {

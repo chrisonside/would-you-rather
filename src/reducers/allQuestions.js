@@ -4,7 +4,6 @@ import {
 } from '../actions';
 
 export function allQuestions(questionsState = {}, action) {
-  console.log(action);
   const { payload } = action;
   switch (action.type) {
     case SET_ALL_QUESTIONS :
@@ -12,7 +11,6 @@ export function allQuestions(questionsState = {}, action) {
         ...questionsState[0] = payload
       }
     case UPDATE_QUESTION_VOTES :
-    console.log('UPDATE_QUESTION_VOTES getting called - 2nd');
       return {
         ...questionsState,
           [payload.qid]: {
