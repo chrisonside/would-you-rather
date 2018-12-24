@@ -35,3 +35,13 @@ I am using Redux Form (which works well with the React-Redux bindings) to manage
 [redux-thunk](https://www.npmjs.com/package/redux-thunk)
 
 Redux Thunk middleware is used to release Redux from its synchronous confines, allowing my app to dispatch actions once it has heard back from an API.
+
+[node-sass]()
+
+I followed this [guide to using SASS in CRA](https://hackernoon.com/using-sass-with-create-react-app-without-ejecting-b5f4f827ed9e), and this recommends to use the node-sass library to natively compile .scss files to CSS.
+
+## Future styling work
+
+If adding/updating styles to this app in the future, to watch the SASS files and update the index.css file that the index.js points to, simply run `npm run sass`.
+
+Finally, to avoid having to remember to transpile CSS before running a new build, a `sass:build` task has been added to the `npm run build` script, which will run a one-time build of the styles automatically.
