@@ -72,8 +72,9 @@ export const clearCurrentPoll = () => dispatch => (
 
 /*
   * Method to add new poll question
-  * As we are spoofing a database, simply adds question to the app's javaScript memory
-  * Note that this redirects to home page afterwards, so calling collateUserAnswers
+  * As we are spoofing a database, this method simply adds the new question to the app's javaScript memory
+  * Note that after calling this action, the AddPoll component redirects to root page afterwards
+  * (and redirecting to the root page measn the PollList Component calls the collateUserAnswers action)
 */
 export const saveQuestion = (question) => dispatch => (
   API
@@ -85,7 +86,7 @@ export const saveQuestion = (question) => dispatch => (
 
 /*
   * Vote in poll
-  * As spoofing a database, adds vote to the app's javaScript memory
+  * As we are spoofing a database, the _saveQuestionAnswer method adds the vote to the app's javaScript memory
   * If this was a real app, we'd save this vote to a real database
 */
 export const saveVoteToDb = (vote) => dispatch => (
@@ -93,7 +94,7 @@ export const saveVoteToDb = (vote) => dispatch => (
   ._saveQuestionAnswer(vote)
 );
 /*
-  * Also update the Redux store
+  * We also need to update the Redux store
 */
 export const saveVoteInStore = (vote) => dispatch => (
   dispatch(updateReduxStore(vote, UPDATE_LOGGEDIN_USER_ANSWERS)),
