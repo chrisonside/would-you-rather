@@ -13,7 +13,7 @@ I've added some simple styling to the app using SASS. I also use a few images/ic
 
 # To get the project up and running
 
-* `git clone git@github.com:chrisonside/would-you-rather.git`
+* `git clone https://github.com/chrisonside/would-you-rather.git`
 * `cd would-you-rather`
 * `npm install`
 * `npm start`
