@@ -35,10 +35,10 @@ const validate = val => {
   * Function to render inputs for form
 */
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
-  <div className="form__entry">
-    <label className="form__label">{label}</label>
-    <input className="form__input-box" {...input} type={type}/>
-    {touched && ((error && <div className="form__error">{error}</div>) || (warning && <span>{warning}</span>))}
+  <div className='form__entry'>
+    <label className='form__label'>{label}</label>
+    <input className='form__input-box' {...input} type={type}/>
+    {touched && ((error && <div className='form__error'>{error}</div>) || (warning && <span>{warning}</span>))}
   </div>
 )
 
@@ -65,18 +65,18 @@ class AddPoll extends Component {
         )}
         {/* Object that includes the following properties: author, optionOneText, and optionTwoText */}
         {(!submitSucceeded) && (
-           <form className="form" onSubmit={handleSubmit(this.handleFormValues)}>
-            <h1 className="form__title">Add a new poll</h1>
-            <h2 className="form__sub-title">Would you rather:</h2>
-            <div className="form__field">
-              <Field name="optionOne" component={renderField} type="text" label="Option one"/>
+           <form className='form' onSubmit={handleSubmit(this.handleFormValues)}>
+            <h1 className='form__title'>Add a new poll</h1>
+            <h2 className='form__sub-title'>Would you rather:</h2>
+            <div className='form__field'>
+              <Field name='optionOne' component={renderField} type='text' label='Option one'/>
             </div>
-            <div className="form__field">
-              <Field name="optionTwo" component={renderField} type="text" label="Option two"/>
+            <div className='form__field'>
+              <Field name='optionTwo' component={renderField} type='text' label='Option two'/>
             </div>
             <div>
-              <button className="form__submit" type="submit" disabled={pristine || submitting}>Submit</button>
-              <button className="form__clear" type="button" disabled={pristine || submitting} onClick={reset}>
+              <button className='form__submit' type='submit' disabled={pristine || submitting}>Submit</button>
+              <button className='form__clear' type='button' disabled={pristine || submitting} onClick={reset}>
                 Clear
               </button>
             </div>

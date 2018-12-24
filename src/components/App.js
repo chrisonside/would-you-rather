@@ -5,7 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { isObjectEmpty } from '../utils/helper';
 import '../styles/app.scss';
 
-import Home from './Home';
+import PollList from './PollList';
 import UserDetails from './UserDetails';
 import Nav from './Nav';
 import SignIn from './SignIn';
@@ -21,9 +21,9 @@ class App extends Component {
     const { loggedInUser } = this.props;
 
     return (
-      <div className="app">
+      <div className='app'>
 
-        <div className="app__wrapper">
+        <div className='app__wrapper'>
 
           {!isObjectEmpty(loggedInUser) &&
             <div className='user-admin'>
@@ -38,12 +38,12 @@ class App extends Component {
             <div>
               <Nav></Nav>
               <Switch>
-                <Route exact path='/' component={Home}/>
+                <Route exact path='/' component={PollList}/>
                 <Route exact path='/add' component={AddPoll}/>
                 <Route exact path='/page-not-found' component={NotFound}/>
                 <Route exact path='/leaderboard' component={Leaderboard}/>
                 <Route exact path='/:id' component={Poll}/>
-                <Route path="*" component={NotFound} />
+                <Route path='*' component={NotFound} />
               </Switch>
             </div>
           }
