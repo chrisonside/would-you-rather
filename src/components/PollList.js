@@ -73,7 +73,7 @@ class PollList extends Component {
                   <h3 className='poll-list__question-title'>
                     {question.optionOne.text} or {question.optionTwo.text}
                   </h3>
-                  <Link to={`/${question.id}`} className='poll-list__link'>
+                  <Link to={`/questions/${question.id}`} className='poll-list__link'>
                       See poll details
                   </Link>
                 </div>
@@ -93,9 +93,9 @@ function convertToArray(object) {
 
 // https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value#answer-1129270
 function compareTimestamp(a,b) {
-  if (a.timestamp < b.timestamp)
-    return -1;
   if (a.timestamp > b.timestamp)
+    return -1;
+  if (a.timestamp < b.timestamp)
     return 1;
   return 0;
 }

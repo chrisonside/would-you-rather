@@ -42,7 +42,7 @@ class App extends Component {
                 <Route exact path='/add' component={AddPoll}/>
                 <Route exact path='/page-not-found' component={NotFound}/>
                 <Route exact path='/leaderboard' component={Leaderboard}/>
-                <Route exact path='/:id' component={Poll}/>
+                <Route exact path='/questions/:id' component={Poll}/>
                 <Route path='*' component={NotFound} />
               </Switch>
             </div>

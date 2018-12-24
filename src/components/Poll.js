@@ -32,10 +32,10 @@ class Poll extends Component {
   componentDidMount() {
     // Set the currentPoll from the id in the URL
     let pollId = window.location.pathname;
-    while(pollId.charAt(0) === '/'){
-      pollId = pollId.substr(1);
-      this.props.setCurrentPollId(pollId);
-    }
+    // Props - https://stackoverflow.com/questions/6165381/how-to-get-the-last-part-of-a-string-in-javascript#answer-6165387
+    pollId = pollId.split("/").pop();
+    this.props.setCurrentPollId(pollId);
+
     // If they've landed fresh on this page, grab users' answered questions data too
     if(isObjectEmpty(this.props.allQuestions)){
       this.props.collateUserAnswers(this.props.loggedInUser);
