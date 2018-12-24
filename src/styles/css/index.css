@@ -1,7 +1,3 @@
-/*
-  * To do in the future - look at only calling individual SASS files into individual components.
-  * Currently I am just creating one big SASS file here and then importing it into app.js
-*/
 html {
   box-sizing: border-box; }
 
